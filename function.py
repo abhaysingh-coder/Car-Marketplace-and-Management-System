@@ -26,16 +26,30 @@ def save_data(data, filename):
     except Exception as e:
         print(f'Data Load Error: {e}')
 
+import os
+import urllib.request
+import joblib
+
+RECOMMANDATION_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "Models",
+    "Recommandation_similarity_matrix.pkl"
+)
+
 def load_recommandation():
     try:
         if not os.path.exists(RECOMMANDATION_PATH):
-            os.makedirs(os.path.dirname(RECOMMANDATION_PATH), exist_ok=True)
-            url = 'https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/Recommandation_similarity_matrix.pkl'
+            os.makedirs(os.path.dirname(RECOMMANDATION_PATH),exist_ok=True)
+            print("Downloading recommendation model...")
+            url = "https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/Recommandation_similarity_matrix.pkl"
             urllib.request.urlretrieve(url, RECOMMANDATION_PATH)
+            print("Recommendation model downloaded successfully")
+        print("Loading recommendation model...")
         similarity_matrix = joblib.load(RECOMMANDATION_PATH)
+        print("Recommendation model loaded successfully")
         return similarity_matrix
     except Exception as e:
-        print(f'Recommandation Model Load Error: {e}')
+        print(f"Recommendation Model Load Error: {e}")
         return None
 
 def load_prediction():

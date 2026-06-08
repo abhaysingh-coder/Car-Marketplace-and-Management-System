@@ -338,7 +338,7 @@ def signup(request):
             phone = request.POST.get('phone')
             password = request.POST.get('password')
             if role == 'admin':
-                database = Admin_Request
+                database = Admin_Registration
                 database2 = Admin_Registration
             elif role == 'staff':
                 database = Staff_Request

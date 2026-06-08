@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | AutoDrive{% endblock %}
+
+{% block content %}
+
+<!-- Hero Carousel -->
+<section class="hero-carousel">
+
+  <div class="slide active">
+    <div class="slide-content">
+      <span>Trusted Car Marketplace</span>
+      <h1>Buy, Sell, Rent & Service Cars Easily</h1>
+      <p>
+        Find your dream car, sell your old car, rent vehicles for trips,
+        and book trusted car services in one place.
+      </p>
+      <a href="{% url 'mainapp:Collection' %}" class="slide-btn">Explore Cars</a>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <span>Car Price Prediction</span>
+      <h1>Predict Your Car Price Instantly</h1>
+      <p>
+        Use smart prediction to estimate car value before buying or selling.
+      </p>
+      <a href="{% url 'mainapp:Prediction' %}" class="slide-btn">Predict Price</a>
+    </div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <span>Smart Recommendation</span>
+      <h1>Find Cars Based On Your Need</h1>
+      <p>
+        Get better car recommendations according to budget, category and usage.
+      </p>
+      <a href="{% url 'mainapp:Recommandation' %}" class="slide-btn">Get Recommendation</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- Services -->
+<section class="features">
+  <div class="section-title reveal">
+    <h2>Our Services</h2>
+    <p>Everything you need for your car in one platform</p>
+  </div>
+
+  <div class="feature-container">
+
+    <div class="feature-card reveal">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <h3>Buy Cars</h3>
+      <p>Browse verified cars with complete details, price and location.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <i class="fa-solid fa-hand-holding-dollar"></i>
+      <h3>Sell Cars</h3>
+      <p>List your car and connect with genuine customers easily.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <i class="fa-solid fa-key"></i>
+      <h3>Rent Cars</h3>
+      <p>Rent cars for daily, weekly, monthly, business or family trips.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+      <h3>Car Service</h3>
+      <p>Book repair, washing, inspection and maintenance services.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Popular Cars -->
+<section class="cars">
+  <div class="section-title reveal">
+    <h2>Popular Cars</h2>
+    <p>Top cars available for buying, selling and renting</p>
+  </div>
+
+  <swiper-container class="mySwiper" loop="true" dir="rtl" mousewheel="true" slides-per-view="3" space-between="30" breakpoints='{"0":{"slidesPerView":1}, "768":{"slidesPerView":2}, "992":{"slidesPerView":3}}'>
+
+    {% for car in top.values %}
+    <swiper-slide>
+        <div class="car-card">
+            {% if car.image %}
+                <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}">
+            {% else %}
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car">
+            {% endif %}
+
+            <div class="car-info">
+                <h3>{{ car.Make }}</h3>
+                <p>
+                    <i class="fa-solid fa-car"></i>
+                    {{ car.Model }}
+                </p>
+                <h4>${{ car.MSRP }}</h4>
+            </div>
+        </div>
+    </swiper-slide>
+    {% endfor %}
+
+</swiper-container>
+</section>
+
+<!-- Prediction Section -->
+<section class="prediction-section">
+  <div class="prediction-content reveal">
+    <span>AI Powered</span>
+    <h2>Car Price Prediction</h2>
+    <p>
+      Predict the estimated price of a car using important details like brand,
+      model, year, fuel type, transmission, kilometers driven and ownership.
+    </p>
+    <a href="{% url 'mainapp:Prediction' %}" class="primary-btn">Predict Now</a>
+  </div>
+
+  <div class="prediction-box reveal">
+    <i class="fa-solid fa-chart-line"></i>
+    <h3>Smart Price Estimation</h3>
+    <p>Helpful for both buyers and sellers before making a deal.</p>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="process">
+  <div class="section-title reveal">
+    <h2>How AutoDrive Works</h2>
+    <p>Simple and easy process for every user</p>
+  </div>
+
+  <div class="process-container">
+
+    <div class="process-card reveal">
+      <span>01</span>
+      <h3>Select Service</h3>
+      <p>Choose buying, selling, renting, prediction or service option.</p>
+    </div>
+
+    <div class="process-card reveal">
+      <span>02</span>
+      <h3>Enter Details</h3>
+      <p>Add your car details, budget, location or requirement.</p>
+    </div>
+
+    <div class="process-card reveal">
+      <span>03</span>
+      <h3>Compare Options</h3>
+      <p>Check available cars, prices, recommendations and services.</p>
+    </div>
+
+    <div class="process-card reveal">
+      <span>04</span>
+      <h3>Confirm Deal</h3>
+      <p>Complete buying, selling, renting or service booking easily.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why">
+  <div class="why-content reveal">
+    <h2>Why Choose AutoDrive?</h2>
+    <p>
+      We provide a safe, simple and trusted platform for car buyers,
+      sellers, renters and service customers.
+    </p>
+
+    <div class="why-grid">
+      <div>
+        <h3>500+</h3>
+        <span>Cars Listed</span>
+      </div>
+
+      <div>
+        <h3>1000+</h3>
+        <span>Happy Customers</span>
+      </div>
+
+      <div>
+        <h3>50+</h3>
+        <span>Service Partners</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="section-title reveal">
+    <h2>What Customers Say</h2>
+    <p>Trusted by customers for cars and services</p>
+  </div>
+
+  <div class="testimonial-container">
+
+    <div class="testimonial-card reveal">
+      <i class="fa-solid fa-quote-left"></i>
+      <p>
+        AutoDrive helped me find a good car within my budget.
+        The design and process are very easy.
+      </p>
+      <h3>Rahul Sharma</h3>
+      <span>Car Buyer</span>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <i class="fa-solid fa-quote-left"></i>
+      <p>
+        I used the price prediction feature before selling my car.
+        It helped me understand the correct value.
+      </p>
+      <h3>Priya Verma</h3>
+      <span>Car Seller</span>
+    </div>
+
+    <div class="testimonial-card reveal">
+      <i class="fa-solid fa-quote-left"></i>
+      <p>
+        Car rental and service options are useful.
+        Everything is available in one website.
+      </p>
+      <h3>Amit Singh</h3>
+      <span>Rental Customer</span>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

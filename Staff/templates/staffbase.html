@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Staff Panel{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{% static 'Image/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/StaffStyle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+<div class="staff-wrapper">
+
+    <aside class="staff-sidebar" id="staffSidebar">
+
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-car-side"></i>
+            <span>AutoDrive</span>
+        </div>
+
+        <div class="sidebar-user">
+
+            <div class="user-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <h3>
+                {% if user %}
+                    {{ user.Name }}
+                {% else %}
+                    Staff
+                {% endif %}
+            </h3>
+
+            <p>
+                {% if user %}
+                    {{ user.Email }}
+                {% else %}
+                    Staff Member
+                {% endif %}
+            </p>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{% url 'Staff:Staff_Home' %}">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <p class="nav-heading">Requests</p>
+
+            <a href="{% url 'Staff:Service' %}">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>Service</span>
+            </a>
+
+            <a href="{% url 'Staff:Renting' %}">
+                <i class="fa-solid fa-key"></i>
+                <span>Rent</span>
+            </a>
+
+            <a href="{% url 'Staff:Buying' %}">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Buy</span>
+            </a>
+
+            <a href="{% url 'Staff:Selling' %}">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <span>Selling</span>
+            </a>
+
+            <p class="nav-heading">Account</p>
+
+            <a href="{% url 'Staff:Notification' %}">
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="{% url 'Staff:Profile' %}">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="{% url 'mainapp:Index' %}">
+                <i class="fa-solid fa-globe"></i>
+                <span>Website</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="{% url 'Staff:Logout' %}"
+               class="logout-btn"
+               onclick="return confirm('Are you sure you want to logout?')">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <main class="staff-main">
+
+        <header class="staff-topbar">
+
+            <button class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+                <h2>{% block page_name %}Dashboard{% endblock %}</h2>
+                <p>Manage customer requests efficiently.</p>
+            </div>
+
+            <div class="topbar-actions">
+
+                <a href="{% url 'Staff:Notification' %}">
+                    <i class="fa-solid fa-bell"></i>
+                </a>
+
+                <a href="{% url 'Staff:Profile' %}">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+
+                <a href="{% url 'Staff:Logout' %}"
+                   class="topbar-logout"
+                   onclick="return confirm('Are you sure you want to logout?')">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <section class="staff-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="{% static 'JS/StaffScript.js' %}"></script>
+
+</body>
+</html>

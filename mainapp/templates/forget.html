@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | AutoDrive</title>
+    
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<section class="auth-section">
+    <div class="auth-card">
+
+        <div class="auth-left">
+            <span>Account Recovery</span>
+
+            <h1>Forgot Password?</h1>
+
+            <p>
+                Verify your account information and create a new password.
+            </p>
+
+            <div class="auth-features">
+                <div>
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Admin Account</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Staff Account</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-user"></i>
+                    <span>Customer Account</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+
+            <form method="POST" class="auth-form">
+                {% csrf_token %}
+
+                <h2>Reset Password</h2>
+
+                {% if error %}
+                <div class="error-box">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="role-tabs">
+
+                    <label class="role-card">
+                        <input type="radio" name="role" value="Admin" required>
+                        <span>
+                            <i class="fa-solid fa-user-shield"></i>
+                            Admin
+                        </span>
+                    </label>
+
+                    <label class="role-card">
+                        <input type="radio" name="role" value="Staff" required>
+                        <span>
+                            <i class="fa-solid fa-user-tie"></i>
+                            Staff
+                        </span>
+                    </label>
+
+                    <label class="role-card">
+                        <input type="radio" name="role" value="Customer" required checked>
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                            Customer
+                        </span>
+                    </label>
+
+                </div>
+
+                <div class="input-box">
+                    <label>Full Name</label>
+                    <input type="text"
+                           name="fullname"
+                           placeholder="Enter Full Name"
+                           required>
+                </div>
+
+                <div class="input-box">
+                    <label>Email Address</label>
+                    <input type="email"
+                           name="email"
+                           placeholder="Enter Email Address"
+                           required>
+                </div>
+
+                <div class="input-box">
+                    <label>Phone Number</label>
+                    <input type="text"
+                           name="phone"
+                           placeholder="Enter Phone Number"
+                           required>
+                </div>
+
+                <div class="input-box">
+                    <label>New Password</label>
+                    <input type="password"
+                           name="password"
+                           placeholder="Enter New Password"
+                           required>
+                </div>
+
+                <div class="input-box">
+                    <label>Confirm Password</label>
+                    <input type="password"
+                           name="confirm_password"
+                           placeholder="Confirm Password"
+                           required>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <i class="fa-solid fa-key"></i>
+                    Reset Password
+                </button>
+
+                <div class="auth-links">
+                    <a href="{% url 'mainapp:Login' %}">
+                        Back to Login
+                    </a>
+
+                    <a href="{% url 'mainapp:Sign_UP' %}">
+                        Create Account
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

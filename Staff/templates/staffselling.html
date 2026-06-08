@@ -1,0 +1,347 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Selling{% endblock %}
+{% block page_name %}Selling Management{% endblock %}
+
+{% block content %}
+
+<div class="request-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Selling Management</span>
+            <h1>Selling Management</h1>
+            <p>View approved selling requests and completed selling history records.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+        </div>
+    </div>
+
+    <div class="service-tabs">
+
+        <button class="tab-btn active" onclick="openTab(event, 'sellingRequestTab')">
+            <i class="fa-solid fa-list-check"></i>
+            Approved Selling Requests
+        </button>
+
+        <button class="tab-btn" onclick="openTab(event, 'sellingHistoryTab')">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Selling History
+        </button>
+
+    </div>
+
+    <div id="sellingRequestTab" class="tab-content active">
+
+        <div class="buy-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Approved Selling Request List</h2>
+                    <p>Approved customer selling requests waiting to be completed.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ selling_requests|length }} Requests
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="buy-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>Year</th>
+                            <th>Engine</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>MPG</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for sell in selling_requests %}
+
+                        <tr>
+                            <td>#{{ sell.order.Sell_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ sell.order.Name }}</strong>
+                                        <small>{{ sell.order.Email }}</small>
+                                        <small>{{ sell.order.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    <div class="car-name">
+                                        <strong>{{ sell.car.Make }} {{ sell.car.Model }}</strong>
+                                        <small>{{ sell.car.Vehicle_Style }}</small>
+                                    </div>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Year }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Engine_HP }} HP<br>
+                                    <small>{{ sell.car.Engine_Cylinders }} Cyl</small>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Transmission_Type }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Vehicle_Size }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.city_mpg }} / {{ sell.car.highway_MPG }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    <strong class="price">₹{{ sell.car.MSRP }}</strong>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.order.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif sell.order.Status == 'Delivered' %}
+                                    <span class="status completed">Delivered</span>
+                                {% elif sell.order.Status == 'Pending' %}
+                                    <span class="status pending">Pending</span>
+                                {% elif sell.order.Status == 'Rejected' %}
+                                    <span class="status rejected">Rejected</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+                                    {% if sell.order.Status == 'Approved' %}
+                                    <a href="{% url 'Staff:Complete_Selling' sell.order.Sell_ID %}"
+                                       class="complete-btn"
+                                       onclick="return confirm('Mark this selling as completed?')">
+                                        <i class="fa-solid fa-check"></i>
+                                        Complete
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+                            <td colspan="11" class="empty-data">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                                <h3>No Approved Selling Requests Found</h3>
+                                <p>No approved customer selling requests are currently available.</p>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="sellingHistoryTab" class="tab-content">
+
+        <div class="buy-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Selling History</h2>
+                    <p>Approved and completed selling records.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ selling_history|length }} Records
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="buy-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>Year</th>
+                            <th>Engine</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>MPG</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for sell in selling_history %}
+
+                        <tr>
+                            <td>#{{ sell.order.Sell_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ sell.order.Name }}</strong>
+                                        <small>{{ sell.order.Email }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    <div class="car-name">
+                                        <strong>{{ sell.car.Make }} {{ sell.car.Model }}</strong>
+                                        <small>{{ sell.car.Vehicle_Style }}</small>
+                                    </div>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Year }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Engine_HP }} HP<br>
+                                    <small>{{ sell.car.Engine_Cylinders }} Cyl</small>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Transmission_Type }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.Vehicle_Size }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    {{ sell.car.city_mpg }} / {{ sell.car.highway_MPG }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.car %}
+                                    <strong class="price">₹{{ sell.car.MSRP }}</strong>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if sell.order.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif sell.order.Status == 'Delivered' %}
+                                    <span class="status completed">Delivered</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+                            <td colspan="10" class="empty-data">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <h3>No Selling History Found</h3>
+                                <p>No approved selling records are currently available.</p>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

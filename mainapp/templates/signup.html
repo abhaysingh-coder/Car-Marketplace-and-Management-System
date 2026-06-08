@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | AutoDrive</title>
+    
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<section class="auth-section">
+    <div class="auth-card">
+
+        <div class="auth-left">
+            <span>Join AutoDrive</span>
+            <h1>Create Account</h1>
+            <p>Register as Staff or Customer. Admin accounts should be created manually by the owner.</p>
+        </div>
+
+        <div class="auth-right">
+            <form method="POST" class="auth-form">
+                {% csrf_token %}
+
+                <h2>Sign Up</h2>
+
+                <div class="role-tabs">
+                    <label class="role-card">
+                        <input type="radio" name="role" value="admin" required>
+                        <span>
+                            <i class="fa-solid fa-user-shield"></i>
+                            Admin
+                        </span>
+                    </label>
+                    <label class="role-card">
+                        <input type="radio" name="role" value="staff" required>
+                        <span>
+                            <i class="fa-solid fa-user-tie"></i>
+                            Staff
+                        </span>
+                    </label>
+
+                    <label class="role-card">
+                        <input type="radio" name="role" value="customer" required checked>
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                            Customer
+                        </span>
+                    </label>
+                </div>
+
+                <div class="input-box">
+                    <label>Full Name</label>
+                    <input type="text" name="fullname" placeholder="Enter full name" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter email address" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" placeholder="Enter phone number" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create password" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirm_password" placeholder="Confirm password" required>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Create Account
+                </button>
+
+                <p class="auth-link">
+                    Already have an account?
+                    <a href="{% url 'mainapp:Login' %}">Login</a>
+                </p>
+
+                <p class="auth-link">
+                    <a href="{% url 'mainapp:Index' %}">Back to Home</a>
+                </p>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

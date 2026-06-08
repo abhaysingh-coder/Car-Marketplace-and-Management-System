@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Buy Now{% endblock %}
+
+{% block content %}
+
+<section class="buy-page-clean">
+
+    <div class="buy-container-clean">
+
+        <div class="buy-heading-clean">
+            <span>
+                <i class="fa-solid fa-cart-shopping"></i>
+                Confirm Purchase
+            </span>
+            <h1>Buy {{ car.Make }} {{ car.Model }}</h1>
+            <p>Check vehicle details and submit your order request.</p>
+        </div>
+
+        <div class="buy-layout-clean">
+
+            <div class="buy-car-clean">
+
+                <div class="buy-car-img-clean">
+                    {% if car.image_url %}
+                    <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}"
+                         onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car">
+                    {% endif %}
+                </div>
+
+                <div class="buy-car-body-clean">
+                    <h2>{{ car.Make }} {{ car.Model }}</h2>
+                    <p>{{ car.Market_Category }}</p>
+
+                    <h3>${{ car.MSRP }}</h3>
+
+                    <div class="buy-specs-clean">
+                        <div><span>Year</span><strong>{{ car.Year }}</strong></div>
+                        <div><span>Engine HP</span><strong>{{ car.Engine_HP }}</strong></div>
+                        <div><span>Cylinders</span><strong>{{ car.Engine_Cylinders }}</strong></div>
+                        <div><span>Transmission</span><strong>{{ car.Transmission_Type }}</strong></div>
+                        <div><span>Driven Wheels</span><strong>{{ car.Driven_Wheels }}</strong></div>
+                        <div><span>Vehicle Size</span><strong>{{ car.Vehicle_Size }}</strong></div>
+                        <div><span>Vehicle Style</span><strong>{{ car.Vehicle_Style }}</strong></div>
+                        <div><span>MPG</span><strong>{{ car.city_mpg }} / {{ car.highway_MPG }}</strong></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="buy-form-clean">
+
+                <h2>Order Information</h2>
+                <p>Enter your contact and delivery details.</p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="Car_ID" value="{{ car.Car_ID }}">
+
+                    <div class="buy-input-clean">
+                        <label>Full Name</label>
+                        <input type="text" name="Name" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="buy-input-clean">
+                        <label>Email</label>
+                        <input type="email" name="Email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="buy-input-clean">
+                        <label>Phone Number</label>
+                        <input type="text" name="Phone_No" placeholder="Enter phone number" required>
+                    </div>
+
+                    <div class="buy-input-clean">
+                        <label>Delivery Address</label>
+                        <textarea name="Address" rows="4" placeholder="Enter your address" required></textarea>
+                    </div>
+
+                    <div class="buy-input-clean">
+                        <label>Payment Mode</label>
+                        <select name="Payment_Mode" required>
+                            <option value="">Select payment mode</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Card">Card</option>
+                            <option value="Net Banking">Net Banking</option>
+                        </select>
+                    </div>
+
+                    <div class="buy-summary-clean">
+                        <div>
+                            <span>Price</span>
+                            <strong>${{ car.MSRP }}</strong>
+                        </div>
+                        <div>
+                            <span>Delivery</span>
+                            <strong>Home Delivery</strong>
+                        </div>
+                        <div>
+                            <span>Status</span>
+                            <strong>Pending</strong>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="buy-submit-clean">
+                        <i class="fa-solid fa-check"></i>
+                        Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

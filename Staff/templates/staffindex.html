@@ -1,0 +1,186 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Staff Dashboard{% endblock %}
+{% block page_name %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <section class="hero-panel">
+
+        <div>
+            <span>Staff Control Center</span>
+
+            <h1>
+                Welcome,
+                {{ user.Name }}
+            </h1>
+
+            <p>
+                Manage customer requests, rentals, purchases,
+                services and notifications from one dashboard.
+            </p>
+        </div>
+
+        <div class="hero-icon">
+            <i class="fa-solid fa-user-tie"></i>
+        </div>
+
+    </section>
+
+    <section class="stats-grid">
+
+        <a href="{% url 'Staff:Service' %}" class="stat-card">
+
+            <div class="stat-icon blue">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+
+            <div>
+                <h3>{{ total_service_request|default:"0" }}</h3>
+                <p>Service Requests</p>
+            </div>
+
+        </a>
+
+        <a href="{% url 'Staff:Renting' %}" class="stat-card">
+
+            <div class="stat-icon green">
+                <i class="fa-solid fa-key"></i>
+            </div>
+
+            <div>
+                <h3>{{ total_rent_request|default:"0" }}</h3>
+                <p>Rent Requests</p>
+            </div>
+
+        </a>
+
+        <a href="{% url 'Staff:Buying' %}" class="stat-card">
+
+            <div class="stat-icon orange">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+
+            <div>
+                <h3>{{ total_buy_request|default:"0" }}</h3>
+                <p>Buy Requests</p>
+            </div>
+
+        </a>
+
+        <a href="{% url 'Staff:Selling' %}" class="stat-card">
+
+            <div class="stat-icon red">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+            </div>
+
+            <div>
+                <h3>{{ total_selling_request|default:"0" }}</h3>
+                <p>Selling Requests</p>
+            </div>
+
+        </a>
+
+    </section>
+
+    <section class="content-grid">
+
+        <div class="panel quick-panel">
+
+            <div class="panel-title">
+                <h2>Quick Actions</h2>
+                <p>Open important modules instantly.</p>
+            </div>
+
+            <div class="quick-grid">
+
+                <a href="{% url 'Staff:Service' %}">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Services</span>
+                </a>
+
+                <a href="{% url 'Staff:Renting' %}">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Renting</span>
+                </a>
+
+                <a href="{% url 'Staff:Buying' %}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Buying</span>
+                </a>
+
+                <a href="{% url 'Staff:Selling' %}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Selling</span>
+                </a>
+
+                <a href="{% url 'Staff:Notification' %}">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="{% url 'Staff:Profile' %}">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="panel request-panel">
+
+            <div class="panel-title">
+                <h2>Request Overview</h2>
+                <p>Frequently used request modules.</p>
+            </div>
+
+            <div class="request-list">
+
+                <a href="{% url 'Staff:Service' %}">
+                    <span>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                        Service Requests
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'Staff:Renting' %}">
+                    <span>
+                        <i class="fa-solid fa-key"></i>
+                        Rent Requests
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'Staff:Buying' %}">
+                    <span>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Buy Requests
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="{% url 'Staff:Selling' %}">
+                    <span>
+                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                        Selling Requests
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

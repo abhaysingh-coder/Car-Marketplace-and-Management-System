@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}{{ value }} Cars{% endblock %}
+
+{% block content %}
+
+<section class="car-list-hero">
+    <div class="container">
+        <span>{{ filter_name|prettify }}</span>
+        <h1>{{ value }} Cars</h1>
+        <p>{{ count }} cars available for you</p>
+    </div>
+</section>
+
+<section class="car-list-page">
+    <div class="container">
+
+        <div class="car-list-grid">
+
+            {% for car in cars %}
+
+            <div class="list-car-card">
+
+                <div class="list-car-image">
+                    {% if car.image_url %}
+                        <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}"
+                             onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car">
+                    {% endif %}
+                </div>
+
+                <div class="list-car-content">
+
+                    <div class="list-car-top">
+                        <h3>{{ car.Make }} {{ car.Model }}</h3>
+                        <span>{{ car.Year }}</span>
+                    </div>
+
+                    <div class="list-car-specs">
+                        <div>
+                            <i class="fa-solid fa-gears"></i>
+                            <p>{{ car.Transmission_Type|title }}</p>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-road"></i>
+                            <p>{{ car.Driven_Wheels|title }}</p>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-car-side"></i>
+                            <p>{{ car.Vehicle_Size|title }}</p>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <p>{{ car.city_mpg }} / {{ car.highway_MPG }} MPG</p>
+                        </div>
+                    </div>
+
+                    <div class="list-car-footer">
+                        <h4>${{ car.MSRP }}</h4>
+
+                        <a href="{% url 'mainapp:Detail_Car' car.Car_ID %}" class="list-view-btn">
+                            View Car
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-box">
+                <i class="fa-solid fa-car-side"></i>
+                <h3>No Cars Found</h3>
+                <p>No matching cars available.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

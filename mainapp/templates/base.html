@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CarHub{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="shortcut icon" href="{% static 'Image/favicon.png' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+
+<body>
+
+<header class="header">
+    <nav class="navbar">
+
+        <a href="{% url 'mainapp:Index' %}" class="logo">
+            <i class="fa-solid fa-car"></i>
+            AutoDrive
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{% url 'mainapp:Index' %}">Home</a></li>
+            <li><a href="{% url 'mainapp:Collection' %}">Collection</a></li>
+            <li><a href="{% url 'mainapp:Prediction' %}">Prediction</a></li>
+            <li><a href="{% url 'mainapp:Recommandation' %}">Recommandation</a></li>
+
+            {% if request.session.User %}
+                <li><a href="{% url 'mainapp:Service' %}">Service</a></li>
+                <li><a href="{% url 'mainapp:Renting' %}">Renting</a></li>
+                <li><a href="{% url 'mainapp:Selling' %}">Selling</a></li>
+                <li><a href="{% url 'mainapp:History' %}">History</a></li>
+            {% endif %}
+
+            <li><a href="{% url 'mainapp:About' %}">About</a></li>
+        </ul>
+
+        <div class="nav-actions">
+
+            {% if request.session.User %}
+
+                <a href="{% url 'mainapp:Notification' %}" class="nav-icon-btn" title="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                </a>
+
+                <a href="{% url 'mainapp:CustomerProfile' %}" class="nav-icon-btn" title="Profile">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+
+                <a href="{% url 'mainapp:Logout' %}" class="login-btn">Logout</a>
+
+            {% else %}
+
+                <a href="{% url 'mainapp:Login' %}" class="login-btn">Login</a>
+
+            {% endif %}
+
+            <div class="menu-icon" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+        </div>
+
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-box">
+            <h2 class="footer-logo">
+                <i class="fa-solid fa-car"></i>
+                <span>Auto</span>Drive
+            </h2>
+
+            <p>
+                AI powered platform for buying, selling, renting and servicing
+                cars with trusted dealers and verified customers.
+            </p>
+        </div>
+
+        <div class="footer-box">
+            <h3>Contact Information</h3>
+
+            <div class="footer-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Abhay Singh</span>
+            </div>
+
+            <div class="footer-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>srinetabhaysingh14@gmail.com</span>
+            </div>
+
+            <div class="footer-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>+91 7985397219</span>
+            </div>
+
+            <div class="footer-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Lucknow, Uttar Pradesh, India</span>
+            </div>
+        </div>
+
+        <div class="footer-box">
+            <h3>Social Media</h3>
+
+            <a href="#" class="social-link">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <span>LinkedIn</span>
+            </a>
+
+            <a href="#" class="social-link">
+                <i class="fa-brands fa-github"></i>
+                <span>GitHub</span>
+            </a>
+
+            <a href="#" class="social-link">
+                <i class="fa-brands fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+            <a href="#" class="social-link">
+                <i class="fa-brands fa-x-twitter"></i>
+                <span>Twitter / X</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 AutoDrive Car Marketplace | Developed By Abhay Singh
+    </div>
+</footer>
+
+<script src="{% static 'JS/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-element-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

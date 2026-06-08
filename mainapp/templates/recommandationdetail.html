@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Recommendation Detail
+{% endblock %}
+
+{% block content %}
+
+<section class="recommendation-detail-page">
+
+    <div class="recommendation-detail-container">
+
+        <div class="recommendation-detail-header">
+            <span>
+                <i class="fa-solid fa-car-side"></i>
+                Recommendation History
+            </span>
+
+            <h1>Recommended Cars</h1>
+
+            <p>
+                Based on your selected car:
+                <strong>{{ recommendation.Brand }} {{ recommendation.Model }}</strong>
+            </p>
+        </div>
+
+        <div class="selected-recommendation-card">
+
+            <div>
+                <span>Recommendation ID</span>
+                <h3>#{{ recommendation.Recommandation_ID }}</h3>
+            </div>
+
+            <div>
+                <span>Selected Brand</span>
+                <h3>{{ recommendation.Brand }}</h3>
+            </div>
+
+            <div>
+                <span>Selected Model</span>
+                <h3>{{ recommendation.Model }}</h3>
+            </div>
+
+            <div>
+                <span>Total Cars</span>
+                <h3>{{ recommendation.Data|length }}</h3>
+            </div>
+
+        </div>
+
+        {% if recommendation.Data %}
+
+        <div class="recommended-cars-grid">
+
+            {% for car in recommendation.Data %}
+
+            <div class="recommended-car-card">
+
+                <div class="recommended-car-image">
+
+                    {% if car.image_url %}
+                    <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% endif %}
+
+                    <span>
+                        {{ car.Year }}
+                    </span>
+
+                </div>
+
+                <div class="recommended-car-content">
+
+                    <h2>{{ car.Make }} {{ car.Model }}</h2>
+
+                    <p class="recommended-category">
+                        {{ car.Market_Category|title }}
+                    </p>
+
+                    <div class="recommended-car-price">
+                        ${{ car.MSRP }}
+                    </div>
+
+                    <div class="recommended-car-info">
+
+                        <div>
+                            <span>Engine HP</span>
+                            <strong>{{ car.Engine_HP }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Cylinders</span>
+                            <strong>{{ car.Engine_Cylinders }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Transmission</span>
+                            <strong>{{ car.Transmission_Type|title }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Driven Wheels</span>
+                            <strong>{{ car.Driven_Wheels|title }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Vehicle Style</span>
+                            <strong>{{ car.Vehicle_Style|title }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Highway MPG</span>
+                            <strong>{{ car.highway_MPG }}</strong>
+                        </div>
+
+                        <div>
+                            <span>City MPG</span>
+                            <strong>{{ car.city_mpg }}</strong>
+                        </div>
+
+                        <div>
+                            <span>Popularity</span>
+                            <strong>{{ car.Popularity }}</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-orders">
+            <h2>No Recommended Cars Found</h2>
+            <p>This recommendation history does not contain any car data.</p>
+        </div>
+
+        {% endif %}
+
+        <div class="recommendation-actions">
+            <a href="{% url 'mainapp:History' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back To History
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

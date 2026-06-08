@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}{{ filter_name }} | AutoDrive{% endblock %}
+
+{% block content %}
+
+<section class="filter-page">
+
+    <div class="container">
+
+        <div class="filter-header">
+
+            <span>
+                <i class="fa-solid fa-filter"></i>
+                AutoDrive Filter
+            </span>
+
+            <h1>{{ filter_name|prettify }}</h1>
+
+            <p>
+                Browse {{ count }} available {{ filter_name|prettify }} options.
+            </p>
+
+        </div>
+
+        <div class="filter-grid">
+
+            {% for value in values %}
+
+            <a href="{% url 'mainapp:Detail' filter_name value %}"
+               class="filter-card">
+
+                <div class="filter-card-icon">
+
+                    {% if filter_name == 'Make' %}
+                        <i class="fa-solid fa-car"></i>
+
+                    {% elif filter_name == 'Model' %}
+                        <i class="fa-solid fa-car-rear"></i>
+
+                    {% elif filter_name == 'Year' %}
+                        <i class="fa-solid fa-calendar"></i>
+
+                    {% elif filter_name == 'Transmission_Type' %}
+                        <i class="fa-solid fa-gears"></i>
+
+                    {% elif filter_name == 'Driven_Wheels' %}
+                        <i class="fa-solid fa-road"></i>
+
+                    {% elif filter_name == 'Vehicle_Size' %}
+                        <i class="fa-solid fa-car-side"></i>
+
+                    {% elif filter_name == 'Vehicle_Style' %}
+                        <i class="fa-solid fa-truck-pickup"></i>
+
+                    {% else %}
+                        <i class="fa-solid fa-filter"></i>
+                    {% endif %}
+
+                </div>
+
+                <div class="filter-card-content">
+
+                    <span>{{ filter_name|prettify }}</span>
+
+                    <h3>{{ value }}</h3>
+
+                    <p>View matching cars</p>
+
+                </div>
+
+                <div class="filter-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </a>
+
+            {% empty %}
+
+            <div class="empty-filter">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <h3>No Records Found</h3>
+
+                <p>No filter values available.</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

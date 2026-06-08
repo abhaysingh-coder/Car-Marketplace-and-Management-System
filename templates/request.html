@@ -1,0 +1,108 @@
+<div class="request-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Pending Registration</span>
+            <h1>{{ role }} Registration Requests</h1>
+            <p>Approve new {{ role }} users or remove invalid requests.</p>
+        </div>
+        {% if role == 'Admin' %}
+            <div class="heading-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+        {% elif role == 'Staff' %}
+            <div class="heading-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="request-table-card">
+
+        <div class="table-top">
+            <h2>{{ role }} Request List</h2>
+            <p>Total Requests: {{ requests|length|default:"0" }}</p>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for user in requests %}
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar">
+                                    {% if role == 'Admin' %}
+                                        <i class="fa-solid fa-user-shield"></i>
+                                    {% elif role == 'Staff' %}
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-user"></i>
+                                    {% endif %}
+                                </div>
+
+                                <strong>{{ user.Name }}</strong>
+                            </div>
+                        </td>
+
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.Phone_No }}</td>
+                        <td>{{ user.Password }}</td>
+
+                        <td>
+                            <div class="action-buttons">
+
+                                <a href="{% url 'Admin:Approve_Admin_Request' role user.Email %}" class="approve-btn">
+                                    <i class="fa-solid fa-check"></i>
+                                    Approve
+                                </a>
+
+                                <a href="{% url 'Admin:Remove_Admin_Request' role user.Email %}" 
+                                   class="remove-btn"
+                                   onclick="return confirm('Are you sure you want to remove this request?')">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Remove
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="6" class="empty-data">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <h3>No {{ role }} Requests Found</h3>
+                            <p>There are no pending {{ role }} registration requests.</p>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

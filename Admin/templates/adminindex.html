@@ -1,0 +1,260 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% block page_name %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <section class="hero-panel">
+        <div>
+            <span>Admin Control Center</span>
+            <h1>Manage AutoDrive Platform</h1>
+            <p>
+                Track admin, staff, customers, services, renting, buying,
+                selling, notifications and history records from one dashboard.
+            </p>
+        </div>
+
+        <div class="hero-icon">
+            <i class="fa-solid fa-car-side"></i>
+        </div>
+    </section>
+
+    <section class="stats-grid">
+
+        <a href="{% url 'Admin:Admin_Request' %}" class="stat-card">
+            <div class="stat-icon blue">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+                <h3>{{ total_admin_request|default:"0" }}</h3>
+                <p>Admin Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Staff_Request' %}" class="stat-card">
+            <div class="stat-icon green">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div>
+                <h3>{{ total_staff_request|default:"0" }}</h3>
+                <p>Staff Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Customer_Management' %}" class="stat-card">
+            <div class="stat-icon orange">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+                <h3>{{ total_customers|default:"0" }}</h3>
+                <p>Customers</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Notification' %}" class="stat-card">
+            <div class="stat-icon red">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+            <div>
+                <h3>{{ total_notifications|default:"0" }}</h3>
+                <p>Notifications</p>
+            </div>
+        </a>
+
+    </section>
+
+    <section class="record-grid">
+
+        <a href="{% url 'Admin:Admin_Management' %}" class="record-card">
+            <i class="fa-solid fa-user-shield"></i>
+            <div>
+                <h3>{{ total_admins|default:"0" }}</h3>
+                <p>Total Admins</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Staff_Management' %}" class="record-card">
+            <i class="fa-solid fa-user-gear"></i>
+            <div>
+                <h3>{{ total_staff|default:"0" }}</h3>
+                <p>Total Staff</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Service_Request' %}" class="record-card">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <div>
+                <h3>{{ total_service_request|default:"0" }}</h3>
+                <p>Service Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Rent_Request' %}" class="record-card">
+            <i class="fa-solid fa-key"></i>
+            <div>
+                <h3>{{ total_rent_request|default:"0" }}</h3>
+                <p>Rent Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Buy_Request' %}" class="record-card">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <div>
+                <h3>{{ total_buy_request|default:"0" }}</h3>
+                <p>Buy Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Selling_Request' %}" class="record-card">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <div>
+                <h3>{{ total_selling_request|default:"0" }}</h3>
+                <p>Selling Requests</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Buy_History' %}" class="record-card">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <div>
+                <h3>{{ total_buy_history|default:"0" }}</h3>
+                <p>Buy History</p>
+            </div>
+        </a>
+
+        <a href="{% url 'Admin:Selling_History' %}" class="record-card">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <div>
+                <h3>{{ total_selling_history|default:"0" }}</h3>
+                <p>Selling History</p>
+            </div>
+        </a>
+
+    </section>
+
+    <section class="content-grid">
+
+        <div class="panel quick-panel">
+            <div class="panel-title">
+                <h2>Quick Actions</h2>
+                <p>Open important modules directly.</p>
+            </div>
+
+            <div class="quick-grid">
+
+                <a href="{% url 'Admin:Admin_Management' %}">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Admins</span>
+                </a>
+
+                <a href="{% url 'Admin:Staff_Management' %}">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>Staff</span>
+                </a>
+
+                <a href="{% url 'Admin:Customer_Management' %}">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+
+                <a href="{% url 'Admin:Service_Request' %}">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Service</span>
+                </a>
+
+                <a href="{% url 'Admin:Rent_Request' %}">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Rent</span>
+                </a>
+
+                <a href="{% url 'Admin:Buy_Request' %}">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Buy</span>
+                </a>
+
+                <a href="{% url 'Admin:Selling_Request' %}">
+                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <span>Selling</span>
+                </a>
+
+                <a href="{% url 'Admin:Notification' %}">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notify</span>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="panel request-panel">
+            <div class="panel-title">
+                <h2>History Overview</h2>
+                <p>Open completed record modules.</p>
+            </div>
+
+            <div class="request-list">
+
+                <a href="{% url 'Admin:Service_History' %}">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i> Service History</span>
+                    <strong>{{ total_service_history|default:"0" }}</strong>
+                </a>
+
+                <a href="{% url 'Admin:Rent_History' %}">
+                    <span><i class="fa-solid fa-car-side"></i> Rent History</span>
+                    <strong>{{ total_rent_history|default:"0" }}</strong>
+                </a>
+
+                <a href="{% url 'Admin:Buy_History' %}">
+                    <span><i class="fa-solid fa-bag-shopping"></i> Buy History</span>
+                    <strong>{{ total_buy_history|default:"0" }}</strong>
+                </a>
+
+                <a href="{% url 'Admin:Selling_History' %}">
+                    <span><i class="fa-solid fa-money-bill-transfer"></i> Selling History</span>
+                    <strong>{{ total_selling_history|default:"0" }}</strong>
+                </a>
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="panel table-panel">
+        <div class="panel-title">
+            <h2>Recent Activities</h2>
+            <p>Latest platform activities.</p>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Activity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in activities %}
+                    <tr>
+                        <td>{{ i.Role|title }}</td>
+                        <td>{{ i.Email }}</td>
+                        <td>{{ i.Activity }}</td>
+                        <td>{{ i.Date }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="empty-text">No activity found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

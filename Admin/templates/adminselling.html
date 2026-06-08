@@ -1,0 +1,192 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Selling History{% endblock %}
+{% block page_name %}Selling History{% endblock %}
+
+{% block content %}
+
+<div class="management-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Selling Management</span>
+            <h1>Selling History</h1>
+            <p>View all customer car selling records and their status.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-car-side"></i>
+        </div>
+    </div>
+
+    <div class="request-table-card mt-5">
+
+        <div class="table-top">
+            <div>
+                <h2>Selling History List</h2>
+                <p>Complete history of customer selling requests.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ history|length|default:"0" }}
+            </span>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Car</th>
+                        <th>Year</th>
+                        <th>Transmission</th>
+                        <th>Vehicle Size</th>
+                        <th>Vehicle Style</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for sell in history %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar sell-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div>
+                                    <strong>{{ sell.order.Name }}</strong>
+                                    <small>{{ sell.order.Email }}</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ sell.order.Phone_No }}</td>
+
+                        <td>
+                            {% if sell.car %}
+                                <strong>{{ sell.car.Make }} {{ sell.car.Model }}</strong>
+                            {% else %}
+                                Car Not Found
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sell.car %}
+                                {{ sell.car.Year }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sell.car %}
+                                {{ sell.car.Transmission_Type }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sell.car %}
+                                {{ sell.car.Vehicle_Size }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sell.car %}
+                                {{ sell.car.Vehicle_Style }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if sell.car %}
+                                <strong class="price">
+                                    ₹{{ sell.car.MSRP }}
+                                </strong>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+
+                            {% if sell.order.Status == 'Pending' %}
+                                <span class="status pending">
+                                    Pending
+                                </span>
+
+                            {% elif sell.order.Status == 'Approved' %}
+                                <span class="status approved">
+                                    Approved
+                                </span>
+
+                            {% elif sell.order.Status == 'Rejected' %}
+                                <span class="status rejected">
+                                    Rejected
+                                </span>
+
+                            {% elif sell.order.Status == 'Delivered' %}
+                                <span class="status delivered">
+                                    Sold
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ sell.order.Date }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="11" class="empty-data">
+
+                            <i class="fa-solid fa-car-side"></i>
+
+                            <h3>
+                                No Selling History Found
+                            </h3>
+
+                            <p>
+                                No customer selling records are available.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

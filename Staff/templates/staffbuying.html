@@ -1,0 +1,306 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Buy{% endblock %}
+{% block page_name %}Buy Management{% endblock %}
+
+{% block content %}
+
+<div class="request-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Buying Management</span>
+            <h1>Buy Management</h1>
+            <p>View approved buy requests and completed buy history records.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </div>
+
+    <div class="service-tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'buyRequestTab')">
+            <i class="fa-solid fa-list-check"></i>
+            Approved Buy Requests
+        </button>
+
+        <button class="tab-btn" onclick="openTab(event, 'buyHistoryTab')">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Buy History
+        </button>
+    </div>
+
+    <div id="buyRequestTab" class="tab-content active">
+
+        <div class="buy-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Approved Buy Request List</h2>
+                    <p>Approved customer buying requests waiting to be completed.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ buy_requests|length }} Requests
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="buy-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>Year</th>
+                            <th>Engine</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>MPG</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for buy in buy_requests %}
+
+                        <tr>
+                            <td>#{{ buy.order.Order_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ buy.order.Name }}</strong>
+                                        <small>{{ buy.order.Email }}</small>
+                                        <small>{{ buy.order.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if buy.car %}
+                                    <div class="car-name">
+                                        <strong>{{ buy.car.Make }} {{ buy.car.Model }}</strong>
+                                        <small>{{ buy.car.Vehicle_Style }}</small>
+                                    </div>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>{% if buy.car %}{{ buy.car.Year }}{% else %}-{% endif %}</td>
+
+                            <td>
+                                {% if buy.car %}
+                                    {{ buy.car.Engine_HP }} HP<br>
+                                    <small>{{ buy.car.Engine_Cylinders }} Cyl</small>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>{% if buy.car %}{{ buy.car.Transmission_Type }}{% else %}-{% endif %}</td>
+
+                            <td>{% if buy.car %}{{ buy.car.Vehicle_Size }}{% else %}-{% endif %}</td>
+
+                            <td>
+                                {% if buy.car %}
+                                    {{ buy.car.city_mpg }} / {{ buy.car.highway_MPG }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if buy.car %}
+                                    <strong class="price">₹{{ buy.car.MSRP }}</strong>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <span class="status approved">{{ buy.order.Status }}</span>
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url 'Staff:Complete_Buy' buy.order.Order_ID %}"
+                                       class="complete-btn"
+                                       onclick="return confirm('Mark this purchase as completed?')">
+                                        <i class="fa-solid fa-check"></i>
+                                        Complete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+                            <td colspan="11" class="empty-data">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <h3>No Approved Buy Requests Found</h3>
+                                <p>No approved customer buy requests are currently available.</p>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="buyHistoryTab" class="tab-content">
+
+        <div class="buy-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Buy History</h2>
+                    <p>Approved and completed buy records.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ buy_history|length }} Records
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="buy-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Customer</th>
+                            <th>Vehicle</th>
+                            <th>Year</th>
+                            <th>Engine</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>MPG</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {% for buy in buy_history %}
+
+                        <tr>
+                            <td>#{{ buy.order.Order_ID }}</td>
+
+                            <td>
+                                {% if buy.car.image_url %}
+                                    <img src="{{ buy.car.image_url }}" alt="{{ buy.car.Make }}" class="car-img">
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <strong>{{ buy.order.Name }}</strong>
+                                        <small>{{ buy.order.Email }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if buy.car %}
+                                    <div class="car-name">
+                                        <strong>{{ buy.car.Make }} {{ buy.car.Model }}</strong>
+                                        <small>{{ buy.car.Vehicle_Style }}</small>
+                                    </div>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>{% if buy.car %}{{ buy.car.Year }}{% else %}-{% endif %}</td>
+
+                            <td>
+                                {% if buy.car %}
+                                    {{ buy.car.Engine_HP }} HP<br>
+                                    <small>{{ buy.car.Engine_Cylinders }} Cyl</small>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>{% if buy.car %}{{ buy.car.Transmission_Type }}{% else %}-{% endif %}</td>
+
+                            <td>{% if buy.car %}{{ buy.car.Vehicle_Size }}{% else %}-{% endif %}</td>
+
+                            <td>
+                                {% if buy.car %}
+                                    {{ buy.car.city_mpg }} / {{ buy.car.highway_MPG }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if buy.car %}
+                                    <strong class="price">₹{{ buy.car.MSRP }}</strong>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if buy.order.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif buy.order.Status == 'Delivered' %}
+                                    <span class="status completed">Delivered</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    {% empty %}
+
+                        <tr>
+                            <td colspan="11" class="empty-data">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <h3>No Buy History Found</h3>
+                                <p>No approved buy records are currently available.</p>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,114 @@
+<div class="management-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Approved Users</span>
+            <h1>{{ role }} Management</h1>
+            <p>View, manage and remove registered {{ role }} users.</p>
+        </div>
+        {% if role == 'Admin' %}
+            <div class="heading-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+        {% elif role == 'Staff' %}
+            <div class="heading-icon">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+        {% elif role == 'Customer' %}
+            <div class="heading-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="request-table-card mt-5">
+
+        <div class="table-top">
+            <div>
+                <h2>{{ role }} Users List</h2>
+                <p>All registered {{ role }} users are shown below.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ users|length|default:"0" }}
+            </span>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone No</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar">
+                                    {% if role == 'Admin' %}
+                                        <i class="fa-solid fa-user-shield"></i>
+                                    {% elif role == 'Staff' %}
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-user"></i>
+                                    {% endif %}
+                                </div>
+
+                                <div>
+                                    <strong>{{ user.Name }}</strong>
+                                    <small>{{ role }} User</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.Phone_No }}</td>
+                        <td>{{ user.Password }}</td>
+
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{% url 'Admin:Remove_User' role user.Email %}"
+                                   class="remove-btn"
+                                   onclick="return confirm('Are you sure you want to remove this user?')">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Remove
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="6" class="empty-data">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <h3>No {{ role }} User Found</h3>
+                            <p>No registered {{ role }} user is available.</p>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

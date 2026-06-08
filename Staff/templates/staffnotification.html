@@ -1,0 +1,67 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Notifications{% endblock %}
+{% block page_name %}Notifications{% endblock %}
+
+{% block content %}
+
+<div class="notification-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Staff Notifications</span>
+            <h1>Notification Center</h1>
+            <p>View important notifications sent by the admin.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-bell"></i>
+        </div>
+    </div>
+
+    <div class="notification-container">
+
+        {% for notification in notifications %}
+
+        <div class="notification-card">
+
+            <div class="notification-icon">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+
+            <div class="notification-content">
+                <div class="notification-top">
+                    <h3>{{ notification.Title }}</h3>
+
+                    <span class="role-badge">
+                        {{ notification.Role }}
+                    </span>
+                </div>
+
+                <p>
+                    {{ notification.Message }}
+                </p>
+
+                <span class="notification-date">
+                    <i class="fa-solid fa-clock"></i>
+                    {{ notification.Date }}
+                </span>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-notification">
+            <i class="fa-solid fa-bell-slash"></i>
+            <h2>No Notifications Found</h2>
+            <p>No notification has been sent to staff yet.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

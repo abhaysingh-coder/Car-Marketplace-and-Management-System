@@ -1,0 +1,161 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Service Requests{% endblock %}
+
+{% block page_name %}Service Requests{% endblock %}
+
+{% block content %}
+
+<div class="management-page">
+
+    <div class="page-heading">
+
+        <div>
+            <span>Vehicle Service</span>
+            <h1>Service Requests</h1>
+            <p>Manage vehicle maintenance and service requests submitted by customers.</p>
+        </div>
+        <div class="heading-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+
+    </div>
+
+    <div class="request-table-card mt-5">
+
+        <div class="table-top">
+
+            <div>
+                <h2>Service Request List</h2>
+                <p>Review and update customer service requests.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ requests|length|default:"0" }}
+            </span>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>Service_ID</th>
+                        <th>Customer</th>
+                        <th>Phone Number</th>
+                        <th>Vehicle Name</th>
+                        <th>Service Type</th>
+                        <th>Vehicle Number</th>
+                        <th>Distance</th>
+                        <th>Problem</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for request in requests %}
+
+                    <tr>
+
+                        <td>{{ request.Service_ID }}</td>
+
+                        <td>
+                            <div class="user-cell">
+
+                                <div class="user-avatar service-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div>
+                                    <strong>{{ request.Name }}</strong>
+                                    <small>{{ request.Email }}</small>
+                                </div>
+
+                            </div>
+                        </td>
+
+                        <td>{{ request.Phone_No }}</td>
+
+                        <td>{{ request.Brand|add:request.Model }}</td>
+
+                        <td>{{ request.Service_Type }}</td>
+
+                        <td>{{ request.Number }}</td>
+
+                        <td>{{ request.Distance }}</td>
+
+                        <td>{{ request.Problem }}</td>
+
+                        <td>
+                            {% if request.Status == 'Pending' %}
+                                <span class="status pending">
+                                    Pending
+                                </span>
+                            {% elif request.Status == 'Approved' %}
+                                <span class="status approved">
+                                    Approved
+                                </span>
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <div class="action-buttons">
+
+                                <a href="{% url 'Admin:Approve_Service_Request' request.Service_ID %}"
+                                   class="approve-btn">
+
+                                    <i class="fa-solid fa-check"></i>
+                                    Approve
+
+                                </a>
+
+                                <a href="{% url 'Admin:Reject_Service_Request' request.Service_ID %}"
+                                   class="remove-btn">
+
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Reject
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="8" class="empty-data">
+
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                            <h3>No Service Requests Found</h3>
+
+                            <p>
+                                No customer service request is currently available.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

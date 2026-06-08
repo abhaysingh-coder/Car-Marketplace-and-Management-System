@@ -1,0 +1,298 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Rent{% endblock %}
+{% block page_name %}Rent Management{% endblock %}
+
+{% block content %}
+
+<div class="request-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Rental Management</span>
+            <h1>Rent Management</h1>
+            <p>View approved rent requests and completed rent history records.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-key"></i>
+        </div>
+    </div>
+
+    <div class="service-tabs">
+
+        <button class="tab-btn active" onclick="openTab(event, 'rentRequestTab')">
+            <i class="fa-solid fa-list-check"></i>
+            Approved Rent Requests
+        </button>
+
+        <button class="tab-btn" onclick="openTab(event, 'rentHistoryTab')">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Rent History
+        </button>
+
+    </div>
+
+    <div id="rentRequestTab" class="tab-content active">
+
+        <div class="request-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Approved Rent Request List</h2>
+                    <p>Approved customer rental requests waiting to be completed.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ rent_requests|length }} Requests
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="request-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Car</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>Pickup Date</th>
+                            <th>Return Date</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for rent in rent_requests %}
+
+                        <tr>
+                            <td>#{{ rent.order.Rent_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar rent-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ rent.order.Name }}</strong>
+                                        <small>{{ rent.order.Email }}</small>
+                                        <small>{{ rent.order.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    <strong>{{ rent.car.Make }} {{ rent.car.Model }}</strong>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    {{ rent.car.Transmission_Type }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    {{ rent.car.Vehicle_Size }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>{{ rent.order.Pickup_Date }}</td>
+
+                            <td>{{ rent.order.Return_Date }}</td>
+
+                            <td>
+                                <div class="address-box">
+                                    {{ rent.order.Address }}
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if rent.order.Status == 'Pending' %}
+                                    <span class="status pending">Pending</span>
+                                {% elif rent.order.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif rent.order.Status == 'Delivered' %}
+                                    <span class="status completed">Delivered</span>
+                                {% elif rent.order.Status == 'Rejected' %}
+                                    <span class="status rejected">Rejected</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+                                    {% if rent.order.Status == 'Approved' %}
+                                    <a href="{% url 'Staff:Complete_Rent' rent.order.Rent_ID %}"
+                                       class="complete-btn"
+                                       onclick="return confirm('Mark this rent as completed?')">
+                                        <i class="fa-solid fa-check"></i>
+                                        Complete
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="10" class="empty-data">
+                                <i class="fa-solid fa-key"></i>
+                                <h3>No Approved Rent Requests Found</h3>
+                                <p>There are currently no approved rent requests.</p>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="rentHistoryTab" class="tab-content">
+
+        <div class="request-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Rent History</h2>
+                    <p>Approved and completed rent records.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ rent_history|length }} Records
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="request-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Car</th>
+                            <th>Transmission</th>
+                            <th>Size</th>
+                            <th>Pickup Date</th>
+                            <th>Return Date</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for rent in rent_history %}
+
+                        <tr>
+                            <td>#{{ rent.order.Rent_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar rent-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ rent.order.Name }}</strong>
+                                        <small>{{ rent.order.Email }}</small>
+                                        <small>{{ rent.order.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    <strong>{{ rent.car.Make }} {{ rent.car.Model }}</strong>
+                                {% else %}
+                                    <strong>Car Not Found</strong>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    {{ rent.car.Transmission_Type }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if rent.car %}
+                                    {{ rent.car.Vehicle_Size }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>{{ rent.order.Pickup_Date }}</td>
+
+                            <td>{{ rent.order.Return_Date }}</td>
+
+                            <td>
+                                <div class="address-box">
+                                    {{ rent.order.Address }}
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if rent.order.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif rent.order.Status == 'Delivered' %}
+                                    <span class="status completed">Delivered</span>
+                                {% elif rent.order.Status == 'Pending' %}
+                                    <span class="status pending">Pending</span>
+                                {% elif rent.order.Status == 'Rejected' %}
+                                    <span class="status rejected">Rejected</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="9" class="empty-data">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <h3>No Rent History Found</h3>
+                                <p>No rent history records are available.</p>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

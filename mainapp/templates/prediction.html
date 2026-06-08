@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Prediction | AutoDrive{% endblock %}
+
+{% block content %}
+
+    <section class="prediction-hero">
+        <div class="prediction-hero-content reveal">
+            <span>AI Powered Car Price Prediction</span>
+            <h1>Predict Car MSRP</h1>
+            <p>
+                Enter vehicle specifications and AutoDrive will estimate the car price
+                using Make, Model, Year, Engine, Transmission, Mileage and Vehicle Type.
+            </p>
+        </div>
+    </section>
+
+    <section class="prediction-form-section">
+        <div class="section-title reveal">
+            <h2>Car Price Prediction Form</h2>
+            <p>Fill the details below to estimate the expected MSRP of the car</p>
+        </div>
+
+        <form class="prediction-form reveal" method="POST">
+            {% csrf_token %}
+
+            <div class="form-grid">
+
+                <div class="input-box">
+                    <label>Make</label>
+                    <input type="text" name="make" placeholder="Example: BMW" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Model</label>
+                    <input type="text" name="model" placeholder="Example: 3 Series" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Year</label>
+                    <input type="number" name="year" placeholder="Example: 2018" min="1990" max="2026" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Engine HP</label>
+                    <input type="number" name="engine_hp" placeholder="Example: 240" min="1" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Engine Cylinders</label>
+                    <input type="number" name="engine_cylinders" placeholder="Example: 4" min="0" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Transmission Type</label>
+                    <select name="transmission_type" required>
+                        <option value="">Select Transmission</option>
+                        {% for i in Transmission_Type %}
+                            <option value="{{i}}">{{i.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Driven Wheels</label>
+                    <select name="driven_wheels" required>
+                        <option value="">Select Driven Wheels</option>
+                        {% for i in Driven_Wheels %}
+                            <option value="{{i}}">{{i.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Market Category</label>
+                    <input type="text" name="market_category" placeholder="Example: Luxury,Performance" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Vehicle Size</label>
+                    <select name="vehicle_size" required>
+                        <option value="">Select Vehicle Size</option>
+                        {% for i in Vehicle_Size %}
+                            <option value="{{i}}">{{i.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Vehicle Style</label>
+                    <select name="vehicle_style" required>
+                        <option value="">Select Vehicle Style</option>
+                        {% for i in Vehicle_Style %}
+                            <option value="{{i}}">{{i.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-box">
+                    <label>Highway MPG</label>
+                    <input type="number" name="highway_mpg" placeholder="Example: 35" min="1" required>
+                </div>
+
+                <div class="input-box">
+                    <label>City MPG</label>
+                    <input type="number" name="city_mpg" placeholder="Example: 25" min="1" required>
+                </div>
+
+                <div class="input-box">
+                    <label>Popularity</label>
+                    <input type="number" name="popularity" placeholder="Example: 3000" min="1" required>
+                </div>
+
+            </div>
+
+            <div class="prediction-actions">
+                <button type="submit" class="predict-btn">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Predict MSRP
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="result-section">
+        <div class="result-card reveal">
+            <i class="fa-solid fa-sack-dollar"></i>
+            <h2>Predicted Car MSRP</h2>
+            <div class="result-price">
+                ${% if result %} {{ result }} {% else %} 0 {% endif %}
+            </div>
+            <p>Estimated manufacturer suggested retail price based on vehicle specifications.</p>
+        </div>
+    </section>
+
+    <section class="prediction-info">
+        <div class="prediction-info-box reveal">
+            <i class="fa-solid fa-gears"></i>
+            <h3>Vehicle Specifications</h3>
+            <p>
+                Make, model, year, engine power, cylinders and transmission help the system
+                understand the technical value of the car.
+            </p>
+        </div>
+
+        <div class="prediction-info-box reveal">
+            <i class="fa-solid fa-gas-pump"></i>
+            <h3>Mileage Details</h3>
+            <p>
+                Highway MPG and city MPG help estimate fuel efficiency, which affects the
+                overall market value of the vehicle.
+            </p>
+        </div>
+
+        <div class="prediction-info-box reveal">
+            <i class="fa-solid fa-chart-simple"></i>
+            <h3>Estimated MSRP</h3>
+            <p>
+                MSRP is the final predicted output. It should not be entered manually because
+                the model calculates it from the given car details.
+            </p>
+        </div>
+    </section>
+
+{% endblock %}

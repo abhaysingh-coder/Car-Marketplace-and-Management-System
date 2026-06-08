@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+
+<section class="notification-page">
+
+    <div class="notification-container">
+
+        <div class="notification-header">
+            <span>
+                <i class="fa-solid fa-bell"></i>
+                Customer Center
+            </span>
+            <h1>My Notifications</h1>
+            <p>View your latest order, selling, renting, prediction and recommendation updates.</p>
+        </div>
+
+        <div class="notification-list">
+
+            {% for notification in notifications %}
+
+            <div class="notification-card {% if notification.Is_Read == False %}unread{% endif %}">
+
+                <div class="notification-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div class="notification-content">
+                    <div class="notification-top">
+                        <h3>{{ notification.Title }}</h3>
+
+                        {% if notification.Is_Read == False %}
+                        <span class="unread-badge">New</span>
+                        {% endif %}
+                    </div>
+
+                    <p>{{ notification.Message }}</p>
+
+                    <div class="notification-meta">
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                            {{ notification.Role }}
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-envelope"></i>
+                            {{ notification.Email }}
+                        </span>
+
+                        <span>
+                            <i class="fa-solid fa-clock"></i>
+                            {{ notification.Date }}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-notification">
+                <i class="fa-solid fa-bell-slash"></i>
+                <h2>No Notifications Found</h2>
+                <p>You do not have any notifications yet.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

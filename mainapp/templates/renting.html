@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cars For Rent
+{% endblock %}
+
+{% block content %}
+
+<section class="renting-page">
+
+    <div class="renting-container">
+
+        <div class="renting-header">
+            <span>
+                <i class="fa-solid fa-key"></i>
+                Available Rental Cars
+            </span>
+
+            <h1>Choose Your Rental Car</h1>
+
+            <p>
+                Browse available cars and rent your preferred vehicle for daily or weekly use.
+            </p>
+        </div>
+
+        {% if cars %}
+
+        <div class="rent-car-grid">
+
+            {% for car in cars %}
+
+            <a href="{% url 'mainapp:Rent_Detail' car.Car_ID %}">
+            <div class="rent-car-card">
+
+                <div class="rent-car-image">
+                    {% if car.image_url %}
+                        <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% endif %}
+                </div>
+
+                <div class="rent-car-content">
+
+                    <span class="rent-badge">
+                        {{ car.Vehicle_Style }}
+                    </span>
+
+                    <h3>
+                        {{ car.Make }} {{ car.Model }}
+                    </h3>
+
+                    <p class="rent-year">
+                        {{ car.Year }} Model
+                    </p>
+
+                    <div class="car-specs">
+
+                        <div>
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>{{ car.Engine_HP }} HP</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-gears"></i>
+                            <span>{{ car.Transmission_Type }}</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-road"></i>
+                            <span>{{ car.Driven_Wheels }}</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>{{ car.Vehicle_Size }}</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-gas-pump"></i>
+                            <span>City {{ car.city_mpg }} MPG</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-route"></i>
+                            <span>Highway {{ car.highway_MPG }} MPG</span>
+                        </div>
+
+                    </div>
+
+                    <div class="rent-price">
+                        <small>Rent Per Day</small>
+                        <h4>${{ car.Rent_Price }}</h4>
+                    </div>
+
+                </div>
+
+            </div>
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-rent-cars">
+            <i class="fa-solid fa-car-burst"></i>
+            <h2>No Cars Available</h2>
+            <p>Currently no cars are available for rent.</p>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

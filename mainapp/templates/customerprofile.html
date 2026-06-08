@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+{% block page_name %}Profile{% endblock %}
+
+{% block content %}
+
+{% include 'profile.html' with user=user %}
+
+{% endblock %}

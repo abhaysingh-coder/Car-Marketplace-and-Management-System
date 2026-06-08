@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Customer Service
+{% endblock %}
+
+{% block content %}
+
+<section class="service-page">
+
+    <div class="service-container">
+
+        <div class="service-gallery-box">
+
+            <div class="main-service-image">
+                <img id="mainServiceImage"
+                     src="{% static 'Image/Service1.png' %}"
+                     alt="Car Service">
+
+                <div class="image-content">
+                    <span>Premium Car Care</span>
+                    <h1 id="serviceTitle">Engine Repair</h1>
+                    <p id="serviceText">
+                        Professional engine diagnosis, maintenance and repair service.
+                    </p>
+                </div>
+            </div>
+
+            <div class="thumbnail-row">
+
+                <div class="thumb active"
+                     data-image="{% static 'Image/Service1.png' %}"
+                     data-title="Engine Repair"
+                     data-text="Professional engine diagnosis, maintenance and repair service.">
+                    <img src="{% static 'Image/Service1.png' %}" alt="">
+                </div>
+
+                <div class="thumb"
+                     data-image="{% static 'Image/Service2.png' %}"
+                     data-title="Complete Car Service"
+                     data-text="Full vehicle inspection, oil change, brake check and car wash.">
+                    <img src="{% static 'Image/Service2.png' %}" alt="">
+                </div>
+
+                <div class="thumb"
+                     data-image="{% static 'Image/logo.png' %}"
+                     data-title="Trusted Vehicle Support"
+                     data-text="Reliable support for all major car brands and service needs.">
+                    <img src="{% static 'Image/logo.png' %}" alt="">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="service-form-box">
+
+            <form method="post" class="service-form">
+                {% csrf_token %}
+
+                <span class="form-badge">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    Book Service
+                </span>
+
+                <h2>Service Request Form</h2>
+
+                <div class="input-row">
+                    <div class="input-box">
+                        <label>Name</label>
+                        <input type="text" name="Name" placeholder="Enter name" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Email</label>
+                        <input type="email" name="Email" placeholder="Enter email" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-box">
+                        <label>Phone Number</label>
+                        <input type="text" name="Phone_No" placeholder="Enter phone no" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Service Type</label>
+                        <select name="Service_Type" required>
+                            <option value="">Select service</option>
+                            <option>General Service</option>
+                            <option>Engine Service</option>
+                            <option>Oil Change</option>
+                            <option>Brake Service</option>
+                            <option>Battery Service</option>
+                            <option>AC Service</option>
+                            <option>Tyre Service</option>
+                            <option>Car Wash</option>
+                            <option>Accident Repair</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-box">
+                        <label>Brand</label>
+                        <input type="text" name="Brand" placeholder="Example: Hyundai" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Model</label>
+                        <input type="text" name="Model" placeholder="Example: Creta" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-box">
+                        <label>Vehicle Number</label>
+                        <input type="text" name="Number" placeholder="UP32 AB 1234" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Distance</label>
+                        <input type="number" name="Distance" placeholder="Distance in KM" required>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <label>Problem</label>
+                    <textarea name="Problem" rows="5" placeholder="Describe vehicle problem" required></textarea>
+                </div>
+
+                <button type="submit" class="service-submit-btn">
+                    Submit Service Request
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

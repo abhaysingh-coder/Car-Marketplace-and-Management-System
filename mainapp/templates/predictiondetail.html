@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Prediction Detail
+{% endblock %}
+
+{% block content %}
+
+<section class="prediction-detail-page">
+
+    <div class="prediction-detail-container">
+
+        <div class="prediction-detail-card">
+
+            <div class="prediction-detail-header">
+                <h1>Prediction Detail</h1>
+                <p>Complete details of your car price prediction</p>
+            </div>
+
+            <div class="prediction-price-box">
+                <span>Predicted Price</span>
+                <h2>${{ prediction.MSRP }}</h2>
+            </div>
+
+            <div class="prediction-info-grid">
+
+                <div class="prediction-info-item">
+                    <span>Role</span>
+                    <h4>{{ prediction.Role|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Email</span>
+                    <h4>{{ prediction.Email }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Make</span>
+                    <h4>{{ prediction.Make }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Model</span>
+                    <h4>{{ prediction.Model|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Year</span>
+                    <h4>{{ prediction.Year }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Engine HP</span>
+                    <h4>{{ prediction.Engine_HP }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Engine Cylinders</span>
+                    <h4>{{ prediction.Engine_Cylinders }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Transmission Type</span>
+                    <h4>{{ prediction.Transmission_Type|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Driven Wheels</span>
+                    <h4>{{ prediction.Driven_Wheels|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Market Category</span>
+                    <h4>{{ prediction.Market_Category|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Vehicle Size</span>
+                    <h4>{{ prediction.Vehicle_Size|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Vehicle Style</span>
+                    <h4>{{ prediction.Vehicle_Style|title }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Highway MPG</span>
+                    <h4>{{ prediction.highway_MPG }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>City MPG</span>
+                    <h4>{{ prediction.city_mpg }}</h4>
+                </div>
+
+                <div class="prediction-info-item">
+                    <span>Popularity</span>
+                    <h4>{{ prediction.Popularity }}</h4>
+                </div>
+
+            </div>
+
+            <div class="prediction-detail-actions">
+                <a href="{% url 'mainapp:History' %}" class="back-btn">
+                    Back To My Activity
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

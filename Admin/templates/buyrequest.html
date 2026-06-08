@@ -1,0 +1,201 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Buy Requests{% endblock %}
+{% block page_name %}Buy Requests{% endblock %}
+
+{% block content %}
+
+<div class="buy-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Buying Management</span>
+            <h1>Buy Requests</h1>
+            <p>Manage customer buy requests for available cars.</p>
+        </div>
+        <div class="heading-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </div>
+
+    <div class="buy-table-card">
+
+        <div class="table-top">
+            <div>
+                <h2>Buy Request List</h2>
+                <p>Review and approve customer car purchase requests.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ requests|length|default:"0" }}
+            </span>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="buy-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Car</th>
+                        <th>Year</th>
+                        <th>Engine</th>
+                        <th>Transmission</th>
+                        <th>Size</th>
+                        <th>Style</th>
+                        <th>MPG</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for buy in requests %}
+
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div>
+                                    <strong>{{ buy.order.Name }}</strong>
+                                    <small>{{ buy.order.Email }}</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ buy.order.Phone_No }}</td>
+
+                        <td>
+                            {% if buy.car %}
+                                <div class="car-name">
+                                    <strong>{{ buy.car.Make }} {{ buy.car.Model }}</strong>
+                                </div>
+                            {% else %}
+                                <strong>Car Not Found</strong>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Year }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Engine_HP }} HP<br>
+                                <small>{{ buy.car.Engine_Cylinders }} Cylinders</small>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Transmission_Type }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Vehicle_Size }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Vehicle_Style }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                <span>{{ buy.car.highway_MPG }} Highway</span><br>
+                                <small>{{ buy.car.city_mpg }} City</small>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                <strong class="price">${{ buy.car.MSRP }}</strong>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.order.Status == 'Pending' %}
+                                <span class="status pending">Pending</span>
+                            {% elif buy.order.Status == 'Approved' %}
+                                <span class="status approved">Approved</span>
+                            {% elif buy.order.Status == 'Rejected' %}
+                                <span class="status rejected">Rejected</span>
+                            {% elif buy.order.Status == 'Delivered' %}
+                                <span class="status delivered">Delivered</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <div class="action-buttons">
+
+                                {% if buy.order.Status == 'Pending' %}
+                                <a href="{% url 'Admin:Approve_Buy_Request' buy.order.Order_ID %}"
+                                   class="approve-btn">
+                                    <i class="fa-solid fa-check"></i>
+                                    Approve
+                                </a>
+                                {% endif %}
+
+                                <a href="{% url 'Admin:Remove_Buy_Request' buy.order.Order_ID %}"
+                                   class="remove-btn"
+                                   onclick="return confirm('Are you sure you want to remove this buy request?')">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Remove
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="13" class="empty-data">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <h3>No Buy Requests Found</h3>
+                            <p>No customer buy request is currently available.</p>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

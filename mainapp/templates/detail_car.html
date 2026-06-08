@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ car.Make }} {{ car.Model }}
+{% endblock %}
+
+{% block content %}
+
+<section class="car-showcase">
+
+    <div class="car-banner">
+
+        {% if car.image %} 
+            <img src="{{ car.image_url }}" alt="{{ car.make }} {{ car.model }}">
+        {% else %}
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car">
+        {% endif %}
+
+        <div class="banner-overlay">
+
+            <span class="vehicle-type">
+                {{ car.Vehicle_Style }}
+            </span>
+
+            <h1>
+                {{ car.Make }} {{ car.Model }}
+            </h1>
+
+            <p>
+                {{ car.Vehicle_Size }} •
+                {{ car.Transmission_Type }} •
+                {{ car.Driven_Wheels }}
+            </p>
+
+            <div class="price-section">
+
+                <h2>
+                    $ {{ car.MSRP }}
+                </h2>
+
+                <span>
+                    Popularity {{ car.Popularity }}
+                </span>
+
+            </div>
+
+            {% if request.session.User %}
+                <div class="action-buttons">
+                    <a href="{% url 'mainapp:Buy_Now' car.Car_ID %}" class="buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Buy Now
+                    </a>
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="quick-highlights">
+
+    <div class="container">
+
+        <div class="highlight-card">
+            <i class="fa-solid fa-calendar"></i>
+            <h3>{{ car.Year }}</h3>
+            <span>Year</span>
+        </div>
+
+        <div class="highlight-card">
+            <i class="fa-solid fa-gauge-high"></i>
+            <h3>{{ car.Engine_HP }}</h3>
+            <span>Horse Power</span>
+        </div>
+
+        <div class="highlight-card">
+            <i class="fa-solid fa-circle-nodes"></i>
+            <h3>{{ car.Engine_Cylinders }}</h3>
+            <span>Cylinders</span>
+        </div>
+
+        <div class="highlight-card">
+            <i class="fa-solid fa-road"></i>
+            <h3>{{ car.Driven_Wheels }}</h3>
+            <span>Drive Type</span>
+        </div>
+
+        <div class="highlight-card">
+            <i class="fa-solid fa-fire"></i>
+            <h3>{{ car.Popularity }}</h3>
+            <span>Popularity</span>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="vehicle-details">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Vehicle Specifications</h2>
+        </div>
+
+        <div class="spec-grid">
+
+            <div class="spec-item">
+                <span>Transmission</span>
+                <strong>{{ car.Transmission_Type }}</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Vehicle Size</span>
+                <strong>{{ car.Vehicle_Size }}</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Vehicle Style</span>
+                <strong>{{ car.Vehicle_Style }}</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Market Category</span>
+                <strong>{{ car.Market_Category }}</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>Highway MPG</span>
+                <strong>{{ car.highway_MPG }}</strong>
+            </div>
+
+            <div class="spec-item">
+                <span>City MPG</span>
+                <strong>{{ car.city_mpg }}</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="car-features">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Why Choose This Car</h2>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-box">
+                <i class="fa-solid fa-crown"></i>
+                <h4>Premium Design</h4>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h4>Reliable Performance</h4>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-gas-pump"></i>
+                <h4>Fuel Efficient</h4>
+            </div>
+
+            <div class="feature-box">
+                <i class="fa-solid fa-award"></i>
+                <h4>Popular Choice</h4>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

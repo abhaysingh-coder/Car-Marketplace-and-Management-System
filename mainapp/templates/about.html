@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About | AutoDrive{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+    <div class="about-content reveal">
+        <span>About AutoDrive</span>
+        <h1>Smart Platform For Buying, Selling, Renting & Servicing Cars</h1>
+        <p>
+            AutoDrive is an AI powered car marketplace where users can explore cars,
+            predict car prices, get recommendations, rent vehicles and book car services
+            from one trusted platform.
+        </p>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="about-image reveal">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" alt="About AutoDrive">
+    </div>
+
+    <div class="about-text reveal">
+        <h2>Who We Are</h2>
+        <p>
+            AutoDrive is designed to make the car journey easier for every user.
+            Whether someone wants to buy a car, sell an old vehicle, rent a car for travel,
+            check car history, or estimate the correct price, this platform provides all
+            important features in one place.
+        </p>
+
+        <p>
+            The website also includes smart car price prediction and recommendation
+            features to help users make better decisions before buying or selling a vehicle.
+        </p>
+
+        <a href="{% url 'mainapp:Collection' %}" class="about-btn">Explore Collection</a>
+    </div>
+</section>
+
+<section class="mission-section">
+
+    <div class="mission-card reveal">
+        <i class="fa-solid fa-car"></i>
+        <h3>Car Marketplace</h3>
+        <p>
+            Browse cars for buying, selling and renting with useful details like price,
+            location and category.
+        </p>
+    </div>
+
+    <div class="mission-card reveal">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Price Prediction</h3>
+        <p>
+            Predict the estimated price of a car using important vehicle information
+            before making a deal.
+        </p>
+    </div>
+
+    <div class="mission-card reveal">
+        <i class="fa-solid fa-lightbulb"></i>
+        <h3>Recommendation</h3>
+        <p>
+            Get smart car recommendations based on user needs, budget and available options.
+        </p>
+    </div>
+
+</section>
+
+<section class="about-section">
+    <div class="about-text reveal">
+        <h2>What Makes AutoDrive Useful?</h2>
+        <p>
+            AutoDrive combines car collection, prediction, recommendation, history and
+            service information in a clean and easy-to-use interface.
+        </p>
+
+        <p>
+            Users do not need to visit different platforms for different car-related work.
+            They can compare cars, understand estimated value, explore options and contact
+            service providers from the same website.
+        </p>
+
+        <a href="{% url 'mainapp:Prediction' %}" class="about-btn">Try Prediction</a>
+    </div>
+
+    <div class="about-image reveal">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car Prediction">
+    </div>
+</section>
+
+<section class="stats-section">
+
+    <div class="stat-box reveal">
+        <h2>500+</h2>
+        <p>Cars Listed</p>
+    </div>
+
+    <div class="stat-box reveal">
+        <h2>1000+</h2>
+        <p>Happy Customers</p>
+    </div>
+
+    <div class="stat-box reveal">
+        <h2>50+</h2>
+        <p>Service Partners</p>
+    </div>
+
+    <div class="stat-box reveal">
+        <h2>24/7</h2>
+        <p>Customer Support</p>
+    </div>
+
+</section>
+
+<section class="testimonials">
+    <div class="section-title reveal">
+        <h2>Our Main Features</h2>
+        <p>AutoDrive provides multiple smart features for car users</p>
+    </div>
+
+    <div class="testimonial-container">
+
+        <div class="testimonial-card reveal">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <h3>Buy Cars</h3>
+            <p>
+                Explore available cars with price, location and useful details.
+            </p>
+        </div>
+
+        <div class="testimonial-card reveal">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <h3>Sell Cars</h3>
+            <p>
+                List cars and connect with genuine buyers easily.
+            </p>
+        </div>
+
+        <div class="testimonial-card reveal">
+            <i class="fa-solid fa-key"></i>
+            <h3>Rent Cars</h3>
+            <p>
+                Rent cars for daily, weekly, monthly, business or family use.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

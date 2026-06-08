@@ -1,0 +1,177 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Buy History{% endblock %}
+{% block page_name %}Buy History{% endblock %}
+
+{% block content %}
+
+<div class="management-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Buying Management</span>
+            <h1>Buy History</h1>
+            <p>View all customer vehicle purchase records.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+    </div>
+
+    <div class="request-table-card mt-5">
+
+        <div class="table-top">
+            <div>
+                <h2>Purchase History List</h2>
+                <p>Complete history of customer vehicle purchases.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ history|length|default:"0" }}
+            </span>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Car</th>
+                        <th>Year</th>
+                        <th>Transmission</th>
+                        <th>Style</th>
+                        <th>Payment</th>
+                        <th>Delivery</th>
+                        <th>Status</th>
+                        <th>Order Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for buy in history %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div>
+                                    <strong>{{ buy.order.Name }}</strong>
+                                    <small>{{ buy.order.Email }}</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ buy.order.Phone_No }}</td>
+
+                        <td>
+                            {% if buy.car %}
+                                <strong>
+                                    {{ buy.car.Make }}
+                                    {{ buy.car.Model }}
+                                </strong>
+                            {% else %}
+                                Car Not Found
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Year }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Transmission_Type }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if buy.car %}
+                                {{ buy.car.Vehicle_Style }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {{ buy.order.Payment_Mode }}
+                        </td>
+
+                        <td>
+                            {{ buy.order.Delivery_Type }}
+                        </td>
+
+                        <td>
+
+                            {% if buy.order.Status == 'Pending' %}
+                                <span class="status pending">Pending</span>
+
+                            {% elif buy.order.Status == 'Approved' %}
+                                <span class="status approved">Approved</span>
+
+                            {% elif buy.order.Status == 'Rejected' %}
+                                <span class="status rejected">Rejected</span>
+
+                            {% elif buy.order.Status == 'Delivered' %}
+                                <span class="status delivered">Delivered</span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ buy.order.Order_Date }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="11" class="empty-data">
+
+                            <i class="fa-solid fa-cart-shopping"></i>
+
+                            <h3>
+                                No Purchase History Found
+                            </h3>
+
+                            <p>
+                                No vehicle purchase records are available.
+                            </p>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+My Activity
+{% endblock %}
+
+{% block content %}
+
+<section class="my-orders-page">
+
+    <div class="orders-container">
+
+        <div class="orders-title">
+            <h1>My Activity</h1>
+            <p>View your orders, selling requests, rent history, predictions and recommendations</p>
+        </div>
+
+        <div class="orders-tabs">
+            <button class="tab-btn active" onclick="openTab('orders', event)">Orders</button>
+            <button class="tab-btn" onclick="openTab('selling', event)">Selling</button>
+            <button class="tab-btn" onclick="openTab('rent', event)">Rent</button>
+            <button class="tab-btn" onclick="openTab('prediction', event)">Prediction</button>
+            <button class="tab-btn" onclick="openTab('recommendation', event)">Recommendation</button>
+        </div>
+
+        <!-- ORDERS TAB -->
+        <div id="orders" class="tab-content active">
+
+            {% if orders %}
+            <div class="orders-list">
+
+                {% for item in orders %}
+                <a href="{% url 'mainapp:Order_Detail' 'Order' item.order.Order_ID %}" class="view-order-btn">
+
+                    <div class="order-row">
+
+                        <div class="order-image-box">
+                            {% if item.car.image_url %}
+                            <img src="{{ item.car.image_url }}" alt="{{ item.car.Make }} {{ item.car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                            {% endif %}
+
+                            <span class="more-items">
+                                Order {{ item.order.Order_ID }}
+                            </span>
+                        </div>
+
+                        <div class="order-product">
+                            <h3>{{ item.car.Make }} {{ item.car.Model }}</h3>
+                            <p>Status: {{ item.order.Status }}</p>
+                            <p>Name: {{ item.order.Name }}</p>
+                            <p>Email: {{ item.order.Email }}</p>
+                        </div>
+
+                        <div class="order-price">
+                            ${{ item.order.Budget }}
+                        </div>
+
+                    </div>
+
+                </a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <div class="no-orders">
+                <h2>No Orders Found</h2>
+                <p>You have not placed any order yet.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- SELLING TAB -->
+        <div id="selling" class="tab-content">
+
+            {% if sold_cars %}
+            <div class="orders-list">
+
+                {% for item in sold_cars %}
+                <a href="{% url 'mainapp:Order_Detail' 'Sold' item.order.Sell_ID %}" class="view-order-btn">
+
+                    <div class="order-row sold-row">
+
+                        <div class="order-image-box">
+                            {% if item.car.image_url %}
+                            <img src="{{ item.car.image_url }}" alt="{{ item.car.Make }} {{ item.car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                            {% endif %}
+
+                            <span class="more-items sold-badge">
+                                {{ item.order.Status }}
+                            </span>
+                        </div>
+
+                        <div class="order-product">
+                            <h3>{{ item.car.Make }} {{ item.car.Model }}</h3>
+                            <p>Sell ID: {{ item.order.Sell_ID }}</p>
+                            <p>Name: {{ item.order.Name }}</p>
+                            <p>Email: {{ item.order.Email }}</p>
+                        </div>
+
+                        <div class="order-price">
+                            ${{ item.car.MSRP }}
+                        </div>
+
+                    </div>
+
+                </a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <div class="no-orders">
+                <h2>No Selling Requests Found</h2>
+                <p>You have not submitted any selling request yet.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- RENT TAB -->
+        <div id="rent" class="tab-content">
+
+            {% if rent_orders %}
+            <div class="orders-list">
+
+                {% for item in rent_orders %}
+                <a href="{% url 'mainapp:Order_Detail' 'Rent' item.order.Rent_ID %}" class="view-order-btn">
+
+                    <div class="order-row">
+
+                        <div class="order-image-box">
+                            {% if item.car.image_url %}
+                            <img src="{{ item.car.image_url }}" alt="{{ item.car.Make }} {{ item.car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                            {% endif %}
+
+                            <span class="more-items">
+                                Rent {{ item.order.Rent_ID }}
+                            </span>
+                        </div>
+
+                        <div class="order-product">
+                            <h3>{{ item.car.Make }} {{ item.car.Model }}</h3>
+                            <p>Status: {{ item.order.Status }}</p>
+                            <p>Name: {{ item.order.Name }}</p>
+                            <p>Email: {{ item.order.Email }}</p>
+                        </div>
+
+                        <div class="order-price">
+                            ${{ item.order.Budget }}
+                        </div>
+
+                    </div>
+
+                </a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <div class="no-orders">
+                <h2>No Rent History Found</h2>
+                <p>You have not rented any car yet.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- PREDICTION TAB -->
+        <div id="prediction" class="tab-content">
+
+            {% if prediction_history %}
+            <div class="orders-list">
+
+                {% for item in prediction_history %}
+                <a href="{% url 'mainapp:Prediction_Detail' item.Predict_ID %}" class="view-order-btn">
+
+                    <div class="order-row">
+
+                        <div class="order-image-box">
+                            <img src="https://images.unsplash.com/photo-1549924231-f129b911e442" alt="Prediction">
+
+                            <span class="more-items">
+                                Prediction
+                            </span>
+                        </div>
+
+                        <div class="order-product">
+                            <h3>{{ item.Make }} {{ item.Model }}</h3>
+                            <p>Role: {{ item.Role }}</p>
+                            <p>Email: {{ item.Email }}</p>
+                            <p>Engine HP: {{ item.Engine_HP }}</p>
+                        </div>
+
+                        <div class="order-price">
+                            ${{ item.MSRP }}
+                        </div>
+
+                    </div>
+
+                </a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <div class="no-orders">
+                <h2>No Prediction History Found</h2>
+                <p>You have not predicted any car price yet.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- RECOMMENDATION TAB -->
+        <div id="recommendation" class="tab-content">
+
+            {% if recommendation_history %}
+            <div class="orders-list">
+
+                {% for item in recommendation_history %}
+                <a href="{% url 'mainapp:Recommendation_Detail' item.Recommandation_ID %}" class="view-order-btn">
+
+                    <div class="order-row">
+
+                        <div class="order-image-box">
+                            {% if item.Data.0.image_url %}
+                            <img src="{{ item.Data.0.image_url }}" alt="{{ item.Data.0.Make }} {{ item.Data.0.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                            {% endif %}
+
+                            <span class="more-items">
+                                {{ item.Data|length }} Cars
+                            </span>
+                        </div>
+
+                        <div class="order-product">
+                            <h3>{{ item.Brand }} {{ item.Model }}</h3>
+                            <p>Role: {{ item.Role }}</p>
+                            <p>Email: {{ item.Email }}</p>
+                            <p>{{ item.Data|length }} recommendations generated</p>
+                        </div>
+
+                        <div class="order-price">
+                            View
+                        </div>
+
+                    </div>
+
+                </a>
+                {% endfor %}
+
+            </div>
+            {% else %}
+            <div class="no-orders">
+                <h2>No Recommendation History Found</h2>
+                <p>You have not searched any recommendation yet.</p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

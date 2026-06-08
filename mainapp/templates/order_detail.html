@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Order Detail
+{% endblock %}
+
+{% block content %}
+
+<section class="order-detail-page">
+
+    <div class="order-detail-container">
+
+        <!-- LEFT SIDE -->
+        <div class="order-detail-left">
+
+            <div class="tracking-note">
+                <p>
+                    Order can be tracked by {{ order.Name }}.
+                    <br>
+                    Tracking can be done via Order Details Section.
+                </p>
+            </div>
+
+            <div class="order-product-card">
+
+                <div class="product-info">
+                    <h2>
+                        {{ car.Make }} {{ car.Model }} {{ car.Year }}
+                    </h2>
+
+                    <p>{{ car.Vehicle_Style }}</p>
+                    <p>{{ car.Transmission_Type }}</p>
+
+                    <h3>${{ car.MSRP }}</h3>
+                </div>
+
+                <div class="product-image">
+                    {% if car.image_url %}
+                        <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <div class="order-timeline">
+
+                <div class="timeline-item active">
+                    <span></span>
+                    <div>
+                        <h4>Order Confirmed</h4>
+                        <p>{{ order.Order_Date }}</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item active">
+                    <span></span>
+                    <div>
+                        <h4>{{ order.Status }}</h4>
+                        <p>{{ order.Delivery_Date }}</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="order-id-box">
+                Order #{{ order.Order_ID }}
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="order-detail-right">
+
+            <div class="side-card">
+
+                <h3>Delivery details</h3>
+
+                <div class="delivery-box">
+                    <div class="detail-line">
+                        <i class="fa-solid fa-house"></i>
+                        <p>
+                            <strong>Home</strong>
+                            {{ order.Address }}
+                        </p>
+                    </div>
+
+                    <div class="detail-line">
+                        <i class="fa-regular fa-user"></i>
+                        <p>
+                            <strong>{{ order.Name }}</strong>
+                            {{ order.Phone_No }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="side-card">
+
+                <h3>Price details</h3>
+
+                <div class="price-box">
+
+                    <div class="price-row">
+                        <span>Listing price</span>
+                        <p>${{ car.MSRP }}</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="price-row total">
+                        <span>Total amount</span>
+                        <p>${{ car.MSRP }}</p>
+                    </div>
+
+                    <div class="paid-box">
+                        <span>Paid By</span>
+                        <p>{{ order.Payment_Mode }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

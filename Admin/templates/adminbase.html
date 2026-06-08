@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{% static 'Image/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'CSS/AdminStyle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+    <aside class="admin-sidebar" id="adminSidebar">
+
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-car-side"></i>
+            <span>AutoDrive</span>
+        </div>
+
+        <div class="sidebar-user">
+            <div class="user-icon">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <h3>
+                {% if user %}
+                    {{ user.Name }}
+                {% else %}
+                    Admin
+                {% endif %}
+            </h3>
+
+            <p>
+                {% if user %}
+                    {{ user.Email }}
+                {% else %}
+                    Administrator
+                {% endif %}
+            </p>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="{% url 'Admin:Admin_Home' %}">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <p class="nav-heading">Users</p>
+
+            <a href="{% url 'Admin:Admin_Request' %}">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Admin Requests</span>
+            </a>
+
+            <a href="{% url 'Admin:Staff_Request' %}">
+                <i class="fa-solid fa-user-check"></i>
+                <span>Staff Requests</span>
+            </a>
+
+            <a href="{% url 'Admin:Admin_Management' %}">
+                <i class="fa-solid fa-user-shield"></i>
+                <span>Admin Management</span>
+            </a>
+
+            <a href="{% url 'Admin:Staff_Management' %}">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Staff Management</span>
+            </a>
+
+            <a href="{% url 'Admin:Customer_Management' %}">
+                <i class="fa-solid fa-users"></i>
+                <span>Customers</span>
+            </a>
+
+            <p class="nav-heading">Requests</p>
+
+            <a href="{% url 'Admin:Service_Request' %}">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>Service Requests</span>
+            </a>
+
+            <a href="{% url 'Admin:Rent_Request' %}">
+                <i class="fa-solid fa-key"></i>
+                <span>Rent Requests</span>
+            </a>
+
+            <a href="{% url 'Admin:Buy_Request' %}">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Buy Requests</span>
+            </a>
+
+            <a href="{% url 'Admin:Selling_Request' %}">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <span>Selling Requests</span>
+            </a>
+
+            <p class="nav-heading">History</p>
+
+            <a href="{% url 'Admin:Service_History' %}">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Service History</span>
+            </a>
+
+            <a href="{% url 'Admin:Rent_History' %}">
+                <i class="fa-solid fa-car-side"></i>
+                <span>Rent History</span>
+            </a>
+
+            <a href="{% url 'Admin:Buy_History' %}">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span>Buy History</span>
+            </a>
+
+            <a href="{% url 'Admin:Selling_History' %}">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Selling History</span>
+            </a>
+
+            <p class="nav-heading">Account</p>
+
+            <a href="{% url 'Admin:Notification' %}">
+                <i class="fa-solid fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+
+            <a href="{% url 'Admin:Profile' %}">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="{% url 'mainapp:Index' %}">
+                <i class="fa-solid fa-globe"></i>
+                <span>Website</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="{% url 'Admin:Logout' %}"
+               class="logout-btn"
+               onclick="return confirm('Are you sure you want to logout?')">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </aside>
+
+    <main class="admin-main">
+
+        <header class="admin-topbar">
+
+            <button class="menu-btn" id="menuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="topbar-title">
+                <h2>{% block page_name %}Dashboard{% endblock %}</h2>
+                <p>Welcome back, manage your platform easily.</p>
+            </div>
+
+            <div class="topbar-actions">
+
+                <a href="{% url 'Admin:Notification' %}" title="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                </a>
+
+                <a href="{% url 'Admin:Profile' %}" title="Profile">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+
+                <a href="{% url 'Admin:Logout' %}"
+                   class="topbar-logout"
+                   title="Logout"
+                   onclick="return confirm('Are you sure you want to logout?')">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+
+            </div>
+
+        </header>
+
+        <section class="admin-content">
+            {% block content %}
+            {% endblock %}
+        </section>
+
+    </main>
+
+</div>
+
+<script src="{% static 'JS/AdminScript.js' %}"></script>
+
+</body>
+</html>

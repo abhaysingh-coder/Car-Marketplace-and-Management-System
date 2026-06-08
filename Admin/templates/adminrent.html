@@ -1,0 +1,143 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Rent History{% endblock %}
+{% block page_name %}Rent History{% endblock %}
+
+{% block content %}
+
+<div class="management-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Car Rent Management</span>
+            <h1>Rent History</h1>
+            <p>View all customer rental records and their current status.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+    </div>
+
+    <div class="request-table-card mt-5">
+
+        <div class="table-top">
+            <div>
+                <h2>Rental History List</h2>
+                <p>Complete history of all car rentals.</p>
+            </div>
+
+            <span class="total-badge">
+                Total: {{ rents|length|default:"0" }}
+            </span>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="request-table">
+
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Car</th>
+                        <th>Transmission</th>
+                        <th>Size</th>
+                        <th>Pickup</th>
+                        <th>Return</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for rent in rents %}
+
+                    <tr>
+
+                        <td>{{ forloop.counter }}</td>
+
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar rent-avatar">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div>
+                                    <strong>{{ rent.order.Name }}</strong>
+                                    <small>{{ rent.order.Email }}</small>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ rent.order.Phone_No }}</td>
+
+                        <td>
+                            {% if rent.car %}
+                                <strong>{{ rent.car.Make }} {{ rent.car.Model }}</strong>
+                            {% else %}
+                                <strong>Car Not Found</strong>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if rent.car %}
+                                {{ rent.car.Transmission_Type }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if rent.car %}
+                                {{ rent.car.Vehicle_Size }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+
+                        <td>{{ rent.order.Pickup_Date }}</td>
+
+                        <td>{{ rent.order.Return_Date }}</td>
+
+                        <td>{{ rent.order.Address }}</td>
+
+                        <td>
+                            {% if rent.order.Status == 'Pending' %}
+                                <span class="status pending">Pending</span>
+                            {% elif rent.order.Status == 'Approved' %}
+                                <span class="status approved">Approved</span>
+                            {% elif rent.order.Status == 'Rejected' %}
+                                <span class="status rejected">Rejected</span>
+                            {% elif rent.order.Status == 'Delivered' %}
+                                <span class="status delivered">Completed</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="10" class="empty-data">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <h3>No Rent History Found</h3>
+                            <p>No rental records are available.</p>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Sell Your Car
+{% endblock %}
+
+{% block content %}
+
+<section class="sell-page">
+
+    <div class="sell-container">
+
+        <div class="sell-header">
+            <span>Car Marketplace</span>
+            <h1>Sell Your Car</h1>
+            <p>Provide complete information about your vehicle and submit your selling request.</p>
+        </div>
+
+        <div class="sell-form-card">
+
+            <form method="post" class="selling-form">
+                {% csrf_token %}
+
+                <!-- OWNER INFORMATION -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-user"></i>
+                        Owner Information
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Owner Name</label>
+                            <input type="text" name="Name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Email Address</label>
+                            <input type="email" name="Email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Phone Number</label>
+                            <input type="text" name="Phone_No" placeholder="Enter phone number" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- BASIC INFORMATION -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-car"></i>
+                        Basic Vehicle Information
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Car Brand</label>
+                            <input type="text" name="Make" placeholder="Toyota" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Car Model</label>
+                            <input type="text" name="Model" placeholder="Corolla" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Manufacturing Year</label>
+                            <input type="number" name="Year" placeholder="2020" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ENGINE DETAILS -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-gears"></i>
+                        Engine Information
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Engine Horse Power</label>
+                            <input type="number" name="Engine_HP" placeholder="250" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Engine Cylinders</label>
+                            <input type="number" name="Engine_Cylinders" placeholder="4" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- VEHICLE SPECIFICATIONS -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-sliders"></i>
+                        Vehicle Specifications
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Transmission Type</label>
+                            <input type="text" name="Transmission_Type" placeholder="Automatic" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Driven Wheels</label>
+                            <input type="text" name="Driven_Wheels" placeholder="Front Wheel Drive" required>
+                        </div>
+
+                    </div>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Market Category</label>
+                            <input type="text" name="Market_Category" placeholder="Luxury, Sedan" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Vehicle Size</label>
+                            <input type="text" name="Vehicle_Size" placeholder="Midsize" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Vehicle Style</label>
+                            <input type="text" name="Vehicle_Style" placeholder="Sedan" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PERFORMANCE -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-gauge-high"></i>
+                        Performance Details
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Highway MPG</label>
+                            <input type="number" name="highway_MPG" placeholder="35" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>City MPG</label>
+                            <input type="number" name="city_mpg" placeholder="28" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Popularity</label>
+                            <input type="number" name="Popularity" placeholder="5000" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- SELLING DETAILS -->
+                <div class="sell-form-section">
+
+                    <h2>
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                        Selling Information
+                    </h2>
+
+                    <div class="sell-form-row">
+
+                        <div class="sell-form-group">
+                            <label>Expected Price (₹)</label>
+                            <input type="number" name="MSRP" placeholder="1000000" required>
+                        </div>
+
+                        <div class="sell-form-group">
+                            <label>Image URL</label>
+                            <input type="url" name="image_url" placeholder="https://example.com/car.jpg" required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="selling-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit Selling Request
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

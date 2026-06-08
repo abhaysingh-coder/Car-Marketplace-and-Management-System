@@ -1,0 +1,11 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Admin Management{% endblock %}
+
+{% block page_name %}Admin Management{% endblock %}
+
+{% block content %}
+
+{% include 'management.html' with role='Admin' users=users %}
+
+{% endblock %}

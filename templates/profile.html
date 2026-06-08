@@ -1,0 +1,100 @@
+<div class="profile-page">
+
+    <div class="profile-banner">
+
+        <div class="profile-banner-content">
+
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <div>
+                <h1>{{ user.Name }}</h1>
+                <span class="role-badge">
+                    {{ user.Role|title }}
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="profile-grid">
+
+        <div class="profile-card">
+
+            <div class="card-header">
+                <h2>
+                    <i class="fa-solid fa-user"></i>
+                    Personal Information
+                </h2>
+            </div>
+
+            <div class="profile-info">
+
+                <div class="info-item">
+                    <span>Full Name</span>
+                    <strong>{{ user.Name }}</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Email Address</span>
+                    <strong>{{ user.Email }}</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Phone Number</span>
+                    <strong>{{ user.Phone_No }}</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Role</span>
+                    <strong>{{ user.Role|title }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-card">
+
+            <div class="card-header">
+                <h2>
+                    <i class="fa-solid fa-circle-info"></i>
+                    Account Information
+                </h2>
+            </div>
+
+            <div class="profile-stats">
+
+                <div class="stat-box">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Active</h3>
+                    <span>Account Status</span>
+                </div>
+
+                <div class="stat-box">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h3>{{ user.Role|title }}</h3>
+                    <span>User Role</span>
+                </div>
+
+                <div class="stat-box">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>Online</h3>
+                    <span>Current Session</span>
+                </div>
+
+                <div class="stat-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <h3>Protected</h3>
+                    <span>Security Status</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

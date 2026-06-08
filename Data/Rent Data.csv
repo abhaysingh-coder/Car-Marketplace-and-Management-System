@@ -1,0 +1,51 @@
+Car_ID,Make,Model,Year,Engine_HP,Engine_Cylinders,Transmission_Type,Driven_Wheels,Market_Category,Vehicle_Size,Vehicle_Style,highway_MPG,city_mpg,Popularity,image_url,Status,Rent_Price,Security
+1,Dodge,Nitro,2011,210.0,6.0,AUTOMATIC,four wheel drive,Crossover,Midsize,4dr SUV,21,15,1851,https://source.unsplash.com/600x400/?Dodge+Nitro+car,Available,999.4,9994.0
+2,GMC,Sierra 1500 Classic,2007,295.0,8.0,AUTOMATIC,four wheel drive,Flex Fuel,Large,Extended Cab Pickup,17,13,549,https://source.unsplash.com/600x400/?GMC+Sierra+1500+Classic+car,Available,1151.6000000000001,11516.0
+3,Nissan,Altima,2016,182.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,39,27,2009,https://source.unsplash.com/600x400/?Nissan+Altima+car,Available,1018.4,10184.0
+4,Cadillac,Escalade Hybrid,2013,332.0,8.0,AUTOMATIC,rear wheel drive,"Luxury, Hybrid",Large,4dr SUV,23,20,1624,https://source.unsplash.com/600x400/?Cadillac+Escalade+Hybrid+car,Available,3354.8,33548.0
+5,Buick,Regal,2016,182.0,4.0,AUTOMATIC,front wheel drive,Flex Fuel,Midsize,Sedan,31,19,155,https://source.unsplash.com/600x400/?Buick+Regal+car,Available,1082.6,10826.0
+6,Mercedes-Benz,S-Class,2016,621.0,12.0,AUTOMATIC,rear wheel drive,"Factory Tuner, Luxury, High-Performance",Large,Sedan,20,13,617,https://source.unsplash.com/600x400/?Mercedes-Benz+S-Class+car,Available,8986.0,89860.0
+7,Nissan,Frontier,2017,152.0,4.0,AUTOMATIC,rear wheel drive,,Compact,Extended Cab Pickup,22,17,2009,https://source.unsplash.com/600x400/?Nissan+Frontier+car,Available,956.4,9564.0
+8,Lexus,GS 350,2017,311.0,6.0,AUTOMATIC,all wheel drive,"Luxury, Performance",Midsize,Sedan,26,19,454,https://source.unsplash.com/600x400/?Lexus+GS+350+car,Available,2262.2000000000003,22622.0
+9,BMW,X1,2017,228.0,4.0,AUTOMATIC,front wheel drive,"Crossover, Luxury",Compact,4dr SUV,32,23,3916,https://source.unsplash.com/600x400/?BMW+X1+car,Available,1324.0,13240.0
+10,Chevrolet,Malibu,2017,250.0,4.0,AUTOMATIC,front wheel drive,Performance,Midsize,Sedan,33,22,1385,https://source.unsplash.com/600x400/?Chevrolet+Malibu+car,Available,1239.0,12390.0
+11,Volkswagen,Tiguan,2017,200.0,4.0,AUTOMATIC,front wheel drive,Crossover,Compact,4dr SUV,24,20,873,https://source.unsplash.com/600x400/?Volkswagen+Tiguan+car,Available,1380.0,13800.0
+12,Infiniti,Q50,2017,208.0,4.0,AUTOMATIC,all wheel drive,Luxury,Midsize,Sedan,28,22,190,https://source.unsplash.com/600x400/?Infiniti+Q50+car,Available,1616.0,16160.0
+13,Chevrolet,Impala,2015,,6.0,AUTOMATIC,front wheel drive,"Flex Fuel, Performance",Large,Sedan,25,17,1385,https://source.unsplash.com/600x400/?Chevrolet+Impala+car,Available,1501.4,15014.0
+14,Pontiac,G6,2009,164.0,4.0,AUTOMATIC,front wheel drive,Flex Fuel,Midsize,Sedan,30,22,210,https://source.unsplash.com/600x400/?Pontiac+G6+car,Available,846.6,8466.0
+15,Dodge,Ram Pickup 1500,2010,310.0,8.0,AUTOMATIC,rear wheel drive,Flex Fuel,Large,Regular Cab Pickup,19,14,1851,https://source.unsplash.com/600x400/?Dodge+Ram+Pickup+1500+car,Available,1006.2,10062.0
+16,Suzuki,Grand Vitara,2013,166.0,4.0,AUTOMATIC,rear wheel drive,Crossover,Compact,4dr SUV,25,19,481,https://source.unsplash.com/600x400/?Suzuki+Grand+Vitara+car,Available,977.96,9779.6
+17,Volkswagen,Vanagon,1990,90.0,4.0,AUTOMATIC,rear wheel drive,,Large,Passenger Minivan,16,15,873,https://source.unsplash.com/600x400/?Volkswagen+Vanagon+car,Available,80.0,800.0
+18,Ford,E-Series Van,2013,255.0,8.0,AUTOMATIC,rear wheel drive,Flex Fuel,Midsize,Cargo Van,16,12,5657,https://source.unsplash.com/600x400/?Ford+E-Series+Van+car,Available,1259.4,12594.0
+19,Chevrolet,Malibu Classic,2008,145.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,30,22,1385,https://source.unsplash.com/600x400/?Chevrolet+Malibu+Classic+car,Available,717.4,7174.0
+20,Kia,Sorento,2017,290.0,6.0,AUTOMATIC,all wheel drive,Crossover,Midsize,4dr SUV,23,17,1720,https://source.unsplash.com/600x400/?Kia+Sorento+car,Available,1616.0,16160.0
+21,Mitsubishi,Mirage G4,2017,78.0,3.0,AUTOMATIC,front wheel drive,,Compact,Sedan,42,35,436,https://source.unsplash.com/600x400/?Mitsubishi+Mirage+G4+car,Available,679.8000000000001,6798.0
+22,Cadillac,ATS Coupe,2015,321.0,6.0,AUTOMATIC,all wheel drive,"Flex Fuel, Luxury, High-Performance",Compact,Coupe,26,18,1624,https://source.unsplash.com/600x400/?Cadillac+ATS+Coupe+car,Available,2057.4,20574.0
+23,Oldsmobile,Aurora,2002,250.0,8.0,AUTOMATIC,front wheel drive,Performance,Large,Sedan,24,16,26,https://source.unsplash.com/600x400/?Oldsmobile+Aurora+car,Available,1403.4,14034.0
+24,Acura,RDX,2016,279.0,6.0,AUTOMATIC,front wheel drive,"Crossover, Luxury",Midsize,4dr SUV,29,20,204,https://source.unsplash.com/600x400/?Acura+RDX+car,Available,1562.8,15628.0
+25,Hyundai,Sonata,2016,185.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,36,25,1439,https://source.unsplash.com/600x400/?Hyundai+Sonata+car,Available,1094.0,10940.0
+26,Audi,A3,2016,170.0,4.0,AUTOMATED_MANUAL,front wheel drive,Luxury,Compact,Sedan,33,23,3105,https://source.unsplash.com/600x400/?Audi+A3+car,Available,1344.0,13440.0
+27,Toyota,Prius c,2014,99.0,4.0,AUTOMATIC,front wheel drive,"Hatchback, Hybrid",Compact,4dr Hatchback,46,53,2031,https://source.unsplash.com/600x400/?Toyota+Prius+c+car,Available,870.6,8706.0
+28,Ford,Escape,2016,178.0,4.0,AUTOMATIC,front wheel drive,Crossover,Compact,4dr SUV,32,23,5657,https://source.unsplash.com/600x400/?Ford+Escape+car,Available,1031.6,10316.0
+29,Lexus,NX 200t,2016,235.0,4.0,AUTOMATIC,all wheel drive,"Crossover, Luxury",Midsize,4dr SUV,28,22,454,https://source.unsplash.com/600x400/?Lexus+NX+200t+car,Available,1454.6000000000001,14546.0
+30,Scion,tC,2014,179.0,4.0,AUTOMATIC,front wheel drive,Hatchback,Compact,2dr Hatchback,31,23,105,https://source.unsplash.com/600x400/?Scion+tC+car,Available,897.6,8976.0
+31,Chevrolet,Silverado 1500 Classic,2007,195.0,6.0,MANUAL,rear wheel drive,Flex Fuel,Large,Regular Cab Pickup,21,15,1385,https://source.unsplash.com/600x400/?Chevrolet+Silverado+1500+Classic+car,Available,633.6,6336.0
+32,Maserati,GranTurismo Convertible,2015,444.0,8.0,AUTOMATIC,rear wheel drive,"Exotic, Luxury, High-Performance",Midsize,Convertible,20,13,238,https://source.unsplash.com/600x400/?Maserati+GranTurismo+Convertible+car,Available,5829.6,58296.0
+33,Volkswagen,Golf GTI,2015,210.0,4.0,MANUAL,front wheel drive,"Hatchback, Performance",Compact,2dr Hatchback,34,25,873,https://source.unsplash.com/600x400/?Volkswagen+Golf+GTI+car,Available,1111.4,11114.0
+34,Chevrolet,Suburban,2015,355.0,8.0,AUTOMATIC,four wheel drive,"Flex Fuel, Performance",Large,4dr SUV,22,15,1385,https://source.unsplash.com/600x400/?Chevrolet+Suburban+car,Available,2671.4,26714.0
+35,Volkswagen,Beetle,2017,210.0,4.0,AUTOMATED_MANUAL,front wheel drive,"Hatchback, Performance",Compact,2dr Hatchback,29,23,873,https://source.unsplash.com/600x400/?Volkswagen+Beetle+car,Available,1302.0,13020.0
+36,Chrysler,Town and Country,2016,283.0,6.0,AUTOMATIC,front wheel drive,Flex Fuel,Midsize,Passenger Minivan,25,17,1013,https://source.unsplash.com/600x400/?Chrysler+Town+and+Country+car,Available,1199.8,11998.0
+37,Volkswagen,Jetta,2015,170.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,37,25,873,https://source.unsplash.com/600x400/?Volkswagen+Jetta+car,Available,1015.2,10152.0
+38,Land Rover,Freelander,2003,174.0,6.0,AUTOMATIC,all wheel drive,"Crossover, Luxury",Compact,4dr SUV,19,15,258,https://source.unsplash.com/600x400/?Land+Rover+Freelander+car,Available,999.0,9990.0
+39,Mazda,RX-8,2010,212.0,,AUTOMATIC,rear wheel drive,Performance,Compact,Coupe,23,16,586,https://source.unsplash.com/600x400/?Mazda+RX-8+car,Available,1312.4,13124.0
+40,Volkswagen,GTI,2013,200.0,4.0,MANUAL,front wheel drive,"Hatchback, Performance",Compact,4dr Hatchback,31,21,873,https://source.unsplash.com/600x400/?Volkswagen+GTI+car,Available,1187.8,11878.0
+41,Audi,S4,2015,333.0,6.0,MANUAL,all wheel drive,"Factory Tuner, Luxury, High-Performance",Midsize,Sedan,26,17,3105,https://source.unsplash.com/600x400/?Audi+S4+car,Available,1936.0,19360.0
+42,BMW,3 Series,2016,320.0,6.0,AUTOMATIC,rear wheel drive,"Luxury, High-Performance",Midsize,Sedan,33,22,3916,https://source.unsplash.com/600x400/?BMW+3+Series+car,Available,1832.0,18320.0
+43,BMW,2 Series,2016,240.0,4.0,AUTOMATIC,rear wheel drive,"Luxury, Performance",Compact,Coupe,35,23,3916,https://source.unsplash.com/600x400/?BMW+2+Series+car,Available,1314.0,13140.0
+44,Ford,Tempo,1994,96.0,4.0,MANUAL,front wheel drive,,Compact,Sedan,30,21,5657,https://source.unsplash.com/600x400/?Ford+Tempo+car,Available,80.0,800.0
+45,Chevrolet,Malibu,2015,196.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,36,25,1385,https://source.unsplash.com/600x400/?Chevrolet+Malibu+car,Available,944.4,9444.0
+46,Hyundai,Santa Fe Sport,2016,190.0,4.0,AUTOMATIC,all wheel drive,Crossover,Midsize,4dr SUV,25,19,1439,https://source.unsplash.com/600x400/?Hyundai+Santa+Fe+Sport+car,Available,1068.0,10680.0
+47,Chevrolet,Traverse,2015,281.0,6.0,AUTOMATIC,front wheel drive,Crossover,Midsize,4dr SUV,24,17,1385,https://source.unsplash.com/600x400/?Chevrolet+Traverse+car,Available,1239.8,12398.0
+48,Chevrolet,Express,2015,285.0,8.0,AUTOMATIC,rear wheel drive,Flex Fuel,Large,Passenger Van,17,11,1385,https://source.unsplash.com/600x400/?Chevrolet+Express+car,Available,1468.0,14680.0
+49,Ford,Freestyle,2006,203.0,6.0,AUTOMATIC,all wheel drive,Crossover,Large,Wagon,22,17,5657,https://source.unsplash.com/600x400/?Ford+Freestyle+car,Available,1134.2,11342.0
+50,Honda,Accord,2017,189.0,4.0,AUTOMATIC,front wheel drive,,Midsize,Sedan,34,26,2202,https://source.unsplash.com/600x400/?Honda+Accord+car,Available,1048.6,10486.0

@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Rent Car Detail
+{% endblock %}
+
+{% block content %}
+
+<section class="rent-detail-page">
+
+    <div class="rent-detail-container">
+
+        <!-- LEFT SIDE -->
+        <div class="rent-detail-left">
+
+            <div class="rent-detail-image">
+                {% if car.image_url %}
+                    <img src="{{ car.image_url }}"
+                         alt="{{ car.Make }} {{ car.Model }}"
+                         onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                {% else %}
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+                         alt="Rental Car">
+                {% endif %}
+            </div>
+
+            <div class="rent-car-info-box">
+
+                <span class="rent-style-badge">
+                    {{ car.Vehicle_Style }}
+                </span>
+
+                <h1>{{ car.Make }} {{ car.Model }}</h1>
+
+                <p>
+                    {{ car.Year }} Model • {{ car.Transmission_Type }} • {{ car.Vehicle_Size }}
+                </p>
+
+                <h2>${{ car.Rent_Price }} / day</h2>
+
+            </div>
+
+            <div class="rent-specs-grid">
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <small>Engine Power</small>
+                    <h4>{{ car.Engine_HP }} HP</h4>
+                </div>
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-gears"></i>
+                    <small>Transmission</small>
+                    <h4>{{ car.Transmission_Type }}</h4>
+                </div>
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-road"></i>
+                    <small>Driven Wheels</small>
+                    <h4>{{ car.Driven_Wheels }}</h4>
+                </div>
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-car-side"></i>
+                    <small>Vehicle Size</small>
+                    <h4>{{ car.Vehicle_Size }}</h4>
+                </div>
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-gas-pump"></i>
+                    <small>City Mileage</small>
+                    <h4>{{ car.city_mpg }} MPG</h4>
+                </div>
+
+                <div class="rent-spec-card">
+                    <i class="fa-solid fa-route"></i>
+                    <small>Highway Mileage</small>
+                    <h4>{{ car.highway_MPG }} MPG</h4>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="rent-detail-right">
+
+            <form method="post" class="rent-booking-form">
+                {% csrf_token %}
+
+                <div class="form-heading">
+                    <span>
+                        <i class="fa-solid fa-key"></i>
+                        Rental Request
+                    </span>
+                    <h2>Rent This Car</h2>
+                    <p>Fill your details to submit a rental request.</p>
+                </div>
+
+                <input type="hidden" name="Car_ID" value="{{ car.Car_ID }}">
+                <input type="hidden" name="Make" value="{{ car.Make }}">
+                <input type="hidden" name="Model" value="{{ car.Model }}">
+                <input type="hidden" name="Transmission_Type" value="{{ car.Transmission_Type }}">
+                <input type="hidden" name="Vehicle_Size" value="{{ car.Vehicle_Size }}">
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text"
+                           name="Name"
+                           placeholder="Enter your name"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email"
+                           name="Email"
+                           placeholder="Enter your email"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text"
+                           name="Phone_No"
+                           placeholder="Enter phone number"
+                           required>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Pickup Date</label>
+                        <input type="date"
+                               name="Pickup_Date"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Return Date</label>
+                        <input type="date"
+                               name="Return_Date"
+                               required>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea name="Address"
+                              rows="4"
+                              placeholder="Enter full address"
+                              required></textarea>
+                </div>
+
+                <div class="rent-price-summary">
+
+                    <div>
+                        <span>Rent per day</span>
+                        <p>${{ car.Rent_Price }}</p>
+                    </div>
+
+                    <div>
+                        <span>Security amount</span>
+                        <p>${{ car.Security }}</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="total">
+                        <span>Estimated payable</span>
+                        <p>${{ car.Total_Amount }}</p>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="rent-book-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Confirm Rent Request
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

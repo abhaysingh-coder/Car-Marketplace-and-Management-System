@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Collection | AutoDrive{% endblock %}
+
+{% block content %}
+
+<section class="collection-page">
+
+    <div class="container">
+
+        <div class="collection-header text-center">
+            <p class="small-title">
+                <i class="fa-solid fa-car-side"></i>
+                AutoDrive Collection
+            </p>
+
+            <h1>Browse Cars By Filters</h1>
+
+            <p>
+                Explore cars by brand, model, year, engine, transmission,
+                driven wheels, vehicle size and body style.
+            </p>
+        </div>
+
+        {% for filter, values in filter_data.items %}
+
+        <div class="rating-slider-wrapper mt-5">
+
+            <div class="filter-showcase-card rating-card-{{ forloop.counter }}">
+
+                <div class="filter-showcase-left">
+
+                    <div class="filter-showcase-icon">
+                        {% if filter == 'Make' %}
+                            <i class="fa-solid fa-car"></i>
+                        {% elif filter == 'Model' %}
+                            <i class="fa-solid fa-car-rear"></i>
+                        {% elif filter == 'Year' %}
+                            <i class="fa-solid fa-calendar"></i>
+                        {% elif filter == 'Engine_Cylinders' %}
+                            <i class="fa-solid fa-gauge-high"></i>
+                        {% elif filter == 'Transmission_Type' %}
+                            <i class="fa-solid fa-gears"></i>
+                        {% elif filter == 'Driven_Wheels' %}
+                            <i class="fa-solid fa-road"></i>
+                        {% elif filter == 'Vehicle_Size' %}
+                            <i class="fa-solid fa-car-side"></i>
+                        {% elif filter == 'Vehicle_Style' %}
+                            <i class="fa-solid fa-truck-pickup"></i>
+                        {% else %}
+                            <i class="fa-solid fa-filter"></i>
+                        {% endif %}
+                    </div>
+
+                    <div class="filter-showcase-content">
+                        <span>Explore Category</span>
+                        <h3>{{ filter|prettify }}</h3>
+                        <p>Find cars based on your preferred {{ filter|title }}.</p>
+                    </div>
+
+                </div>
+
+                <a href="{% url 'mainapp:Filter' filter %}" class="filter-showcase-btn">
+                    Show All
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+            <swiper-container
+                class="ratingSwiper"
+                loop="true"
+                grab-cursor="true"
+                free-mode="true"
+                mousewheel="true"
+                autoplay-delay="2500"
+                autoplay-disable-on-interaction="false"
+                space-between="28"
+                breakpoints='{"0":{"slidesPerView":1},"576":{"slidesPerView":2},"768":{"slidesPerView":3},"1200":{"slidesPerView":4}}'>
+
+                {% for value in values %}
+
+                <swiper-slide>
+
+                    <a href="{% url 'mainapp:Detail' filter value %}" class="rating-link">
+
+                        <div class="collection-rating-card rating-card-{{ forloop.counter }}">
+
+                            <div class="rating-icon">
+                                {% if filter == 'Make' %}
+                                    <i class="fa-solid fa-car"></i>
+                                {% elif filter == 'Model' %}
+                                    <i class="fa-solid fa-car-rear"></i>
+                                {% elif filter == 'Year' %}
+                                    <i class="fa-solid fa-calendar"></i>
+                                {% elif filter == 'Engine_Cylinders' %}
+                                    <i class="fa-solid fa-gauge-high"></i>
+                                {% elif filter == 'Transmission_Type' %}
+                                    <i class="fa-solid fa-gears"></i>
+                                {% elif filter == 'Driven_Wheels' %}
+                                    <i class="fa-solid fa-road"></i>
+                                {% elif filter == 'Vehicle_Size' %}
+                                    <i class="fa-solid fa-car-side"></i>
+                                {% elif filter == 'Vehicle_Style' %}
+                                    <i class="fa-solid fa-truck-pickup"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-filter"></i>
+                                {% endif %}
+                            </div>
+
+                            <div class="rating-card-content">
+                                <span class="rating-label">{{ filter|title }}</span>
+                                <h3>{{ value|title }}</h3>
+                                <p>View cars under {{ value|title }}</p>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </swiper-slide>
+
+                {% endfor %}
+
+            </swiper-container>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-collection">
+            <i class="fa-solid fa-car-side"></i>
+            <h3>No Filters Available</h3>
+            <p>No car filter data found.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

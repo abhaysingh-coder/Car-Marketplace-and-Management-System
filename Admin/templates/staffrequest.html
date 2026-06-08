@@ -1,0 +1,11 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Staff Requests{% endblock %}
+
+{% block page_name %}Staff Requests{% endblock %}
+
+{% block content %}
+
+    {% include 'request.html' with role='Staff' requests=requests %}
+
+{% endblock %}

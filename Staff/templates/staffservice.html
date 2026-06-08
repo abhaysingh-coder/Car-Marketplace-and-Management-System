@@ -1,0 +1,254 @@
+{% extends 'staffbase.html' %}
+
+{% block title %}Service{% endblock %}
+{% block page_name %}Service Management{% endblock %}
+
+{% block content %}
+
+<div class="request-page">
+
+    <div class="page-heading">
+        <div>
+            <span>Customer Services</span>
+            <h1>Service Management</h1>
+            <p>Manage pending service requests and view completed service history.</p>
+        </div>
+
+        <div class="heading-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+        </div>
+    </div>
+
+    <div class="service-tabs">
+
+        <button class="tab-btn active" onclick="openTab(event, 'requestTab')">
+            <i class="fa-solid fa-list-check"></i>
+            Service Requests
+        </button>
+
+        <button class="tab-btn" onclick="openTab(event, 'historyTab')">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Service History
+        </button>
+
+    </div>
+
+    <div id="requestTab" class="tab-content active">
+
+        <div class="request-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Service Requests</h2>
+                    <p>Process customer vehicle service requests.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ services.count }} Requests
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="request-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Vehicle</th>
+                            <th>Number</th>
+                            <th>Distance</th>
+                            <th>Status</th>
+                            <th>Problem</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for service in services %}
+
+                        <tr>
+                            <td>#{{ service.Service_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar service-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ service.Name }}</strong>
+                                        <small>{{ service.Email }}</small>
+                                        <small>{{ service.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>{{ service.Service_Type }}</td>
+
+                            <td>
+                                <strong>{{ service.Brand }} {{ service.Model }}</strong>
+                            </td>
+
+                            <td>{{ service.Number }}</td>
+
+                            <td>{{ service.Distance }} KM</td>
+
+                            <td>
+                                {% if service.Status == 'Pending' %}
+                                    <span class="status pending">Pending</span>
+                                {% elif service.Status == 'Approved' %}
+                                    <span class="status approved">Approved</span>
+                                {% elif service.Status == 'Completed' %}
+                                    <span class="status completed">Completed</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="problem-box">
+                                    {{ service.Problem }}
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+
+                                    {% if service.Status != 'Completed' %}
+                                    <a href="{% url 'Staff:Complete_Service' service.Service_ID %}"
+                                       class="complete-btn"
+                                       onclick="return confirm('Mark this service as completed?')">
+                                        <i class="fa-solid fa-check"></i>
+                                        Complete
+                                    </a>
+                                    {% endif %}
+
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="9" class="empty-data">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <h3>No Service Requests Found</h3>
+                                <p>There are currently no pending service requests.</p>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="historyTab" class="tab-content">
+
+        <div class="request-table-card">
+
+            <div class="table-top">
+                <div>
+                    <h2>Service History</h2>
+                    <p>Completed service request records.</p>
+                </div>
+
+                <span class="total-badge">
+                    {{ service_history.count }} Records
+                </span>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="request-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Service</th>
+                            <th>Vehicle</th>
+                            <th>Number</th>
+                            <th>Distance</th>
+                            <th>Status</th>
+                            <th>Problem</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for service in service_history %}
+
+                        <tr>
+                            <td>#{{ service.Service_ID }}</td>
+
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar service-avatar">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+
+                                    <div>
+                                        <strong>{{ service.Name }}</strong>
+                                        <small>{{ service.Email }}</small>
+                                        <small>{{ service.Phone_No }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>{{ service.Service_Type }}</td>
+
+                            <td>
+                                <strong>{{ service.Brand }} {{ service.Model }}</strong>
+                            </td>
+
+                            <td>{{ service.Number }}</td>
+
+                            <td>{{ service.Distance }} KM</td>
+
+                            <td>
+                                <span class="status completed">
+                                    {{ service.Status }}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="problem-box">
+                                    {{ service.Problem }}
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="8" class="empty-data">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <h3>No Service History Found</h3>
+                                <p>No completed service records available.</p>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

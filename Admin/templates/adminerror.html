@@ -1,0 +1,14 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Error{% endblock %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'CSS/style.css' %}">{% endblock %}
+
+
+{% block page_name %}Error Page{% endblock %}
+
+{% block content %}
+
+{% include 'errorpage.html' with error=error %}
+
+{% endblock %}

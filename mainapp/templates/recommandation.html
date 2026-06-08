@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Recommendation | AutoDrive{% endblock %}
+
+{% block content %}
+
+<section class="rec-clean-hero">
+    <div>
+        <span>Car Recommendation</span>
+        <h1>Find Similar Cars</h1>
+        <p>Enter car brand and model to get 10 similar car recommendations.</p>
+    </div>
+</section>
+
+<section class="rec-search-section">
+    <form class="rec-search-card" method="POST">
+        {% csrf_token %}
+
+        <div class="rec-input">
+            <label>Brand / Make</label>
+            <input type="text" name="car_name" placeholder="BMW" required>
+        </div>
+
+        <div class="rec-input">
+            <label>Model</label>
+            <input type="text" name="car_model" placeholder="1 Series M" required>
+        </div>
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Recommend Cars
+        </button>
+    </form>
+</section>
+
+{% if selected_car %}
+<section class="selected-car-section">
+    <div class="selected-car-card">
+        <i class="fa-solid fa-car-side"></i>
+        <div>
+            <span>Selected Car</span>
+            <h2>{{ selected_car }}</h2>
+            <p>Showing similar cars based on your selected brand and model.</p>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if message %}
+<section class="selected-car-section">
+    <div class="selected-car-card error-card">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div>
+            <span>Car Not Found</span>
+            <h2>{{ not_found }}</h2>
+            <p>Please enter a valid brand and model from the dataset.</p>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if cars %}
+<section class="rec-results-section">
+    <div class="section-title">
+        <h2>Recommended Cars</h2>
+        <p>Top 10 similar cars for your search</p>
+    </div>
+
+    <div class="rec-grid">
+        {% for car in cars %}
+        <div class="rec-card">
+            <div class="rec-card-top">
+                <h3>{{ car.Make }} {{ car.Model }}</h3>
+                <span>{{ car.Year }}</span>
+            </div>
+
+            <div class="rec-card-details">
+                <p><i class="fa-solid fa-bolt"></i> {{ car.Engine_HP }} HP</p>
+                <p><i class="fa-solid fa-gears"></i> {{ car.Transmission_Type.title }}</p>
+                <p><i class="fa-solid fa-car"></i> {{ car.Vehicle_Size }} / {{ car.Vehicle_Style }}</p>
+                <p><i class="fa-solid fa-road"></i> {{ car.highway_MPG }} Highway MPG</p>
+                <p><i class="fa-solid fa-city"></i> {{ car.city_mpg }} City MPG</p>
+            </div>
+
+            <div class="rec-card-bottom">
+                <h4>$ {{ car.MSRP }}</h4>
+                <span>Recommended</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

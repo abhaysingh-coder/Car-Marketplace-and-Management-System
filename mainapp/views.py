@@ -10,8 +10,6 @@ import os
 from decoder import login_required_custom
 
 data = load_data('Data.csv')
-similarity_matrix = load_recommandation()
-model = load_prediction()
 
 data.drop(['Engine Fuel Type', 'Number of Doors'], axis=1, inplace=True)
 data.columns = [col.replace(" ", "_") for col in data.columns]
@@ -29,6 +27,7 @@ col, row = data.shape
 
 
 def recommend(matches):
+    similarity_matrix = load_recommandation()
     car_index = matches.index[0]
     similarity_scores = list(enumerate(similarity_matrix[car_index]))
     similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
@@ -162,7 +161,7 @@ def prediction(request):
     try:
         user = request.session.get('User')
         result = None
-
+        model = load_prediction()
         if request.method == 'POST':
             sample_dict = {
                 'Make': request.POST.get('make'),

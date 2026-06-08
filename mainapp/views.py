@@ -350,7 +350,7 @@ def signup(request):
             if database2.objects.filter(Email=email).exists() or database.objects.filter(Email=email).exists():
                 return render(request, 'signup.html', {'message': 'Email already exists'})
             database.objects.create(Name=fullname, Email=email, Phone_No=phone, Password=password)
-            return redirect('mainapp:Sign_UP')
+            return redirect('mainapp:Index')
         return render(request, 'signup.html')
     except Exception as e:
         return render(request, 'error.html', {'error': e})

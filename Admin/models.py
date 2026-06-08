@@ -57,8 +57,10 @@ class NotificationModel(models.Model):
 class Service_Request(models.Model):
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved')]
     Service_ID = models.AutoField(primary_key=True)
+    User_Name = models.CharField(max_length=30)
+    User_Email = models.EmailField()
     Name = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
+    Email = models.EmailField()
     Phone_No = models.CharField(max_length=30)
     Service_Type = models.CharField(max_length=30)
     Brand = models.CharField(max_length=30)
@@ -70,8 +72,10 @@ class Service_Request(models.Model):
 
 class Service_History(models.Model):
     Service_ID = models.IntegerField(primary_key=True)
+    User_Name = models.CharField(max_length=30)
+    User_Email = models.EmailField()
     Name = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
+    Email = models.EmailField()
     Phone_No = models.CharField(max_length=30)
     Service_Type = models.CharField(max_length=30)
     Brand = models.CharField(max_length=30)
@@ -84,26 +88,24 @@ class CarRent(models.Model):
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected'), ('Delivered', 'Delivered')]
     Rent_ID = models.AutoField(primary_key=True)
     Car_ID = models.IntegerField()
+    User_Name = models.CharField(max_length=30)
+    User_Email = models.EmailField()
     Name = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
+    Email = models.EmailField()
     Phone_No = models.CharField(max_length=30)
     Pickup_Date = models.DateField(null=True, blank=True)
     Return_Date = models.DateField(null=True, blank=True)
     Address = models.TextField()
     Status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
 
-class activities(models.Model):
-    Role = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
-    Activity = models.CharField(max_length=30)
-    Date = models.DateTimeField(auto_now_add=True)
-
 class CarOrder(models.Model):
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected'), ('Delivered', 'Delivered')]
     Order_ID = models.AutoField(primary_key=True)
     Car_ID = models.IntegerField()
+    User_Name = models.CharField(max_length=30)
+    User_Email = models.EmailField()
     Name = models.CharField(max_length=100)
-    Email = models.CharField(max_length=100)
+    Email = models.EmailField()
     Phone_No = models.CharField(max_length=15)
     Address = models.TextField()
     Payment_Mode = models.CharField(max_length=50, default='Cash')
@@ -119,8 +121,10 @@ class CarSelling(models.Model):
     STATUS_CHOICES = [('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected'), ('Delivered', 'Delivered')]
     Sell_ID = models.AutoField(primary_key=True)
     Car_ID = models.IntegerField()
+    User_Name = models.CharField(max_length=30)
+    User_Email = models.EmailField()
     Name = models.CharField(max_length=100)
-    Email = models.CharField(max_length=100)
+    Email = models.EmailField()
     Phone_No = models.CharField(max_length=15)
     Status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     Date = models.DateTimeField(auto_now_add=True)

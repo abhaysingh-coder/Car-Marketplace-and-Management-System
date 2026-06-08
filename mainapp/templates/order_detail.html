@@ -11,20 +11,25 @@ Order Detail
 
     <div class="order-detail-container">
 
-        <!-- LEFT SIDE -->
+        {% for item in order_list %}
+
+        {% with order=item.order car=item.car type=item.type status=item.Status %}
+
         <div class="order-detail-left">
 
             <div class="tracking-note">
                 <p>
-                    Order can be tracked by {{ order.Name }}.
+                    {{ type }} request can be tracked by {{ order.Name }}.
                     <br>
-                    Tracking can be done via Order Details Section.
+                    Current status: <strong>{{ status }}</strong>
                 </p>
             </div>
 
             <div class="order-product-card">
 
                 <div class="product-info">
+                    <span class="order-type-badge">{{ type }}</span>
+
                     <h2>
                         {{ car.Make }} {{ car.Model }} {{ car.Year }}
                     </h2>
@@ -32,12 +37,16 @@ Order Detail
                     <p>{{ car.Vehicle_Style }}</p>
                     <p>{{ car.Transmission_Type }}</p>
 
-                    <h3>${{ car.MSRP }}</h3>
+                    <h3>${% if car.MSRP %}{{ car.MSRP }}{% else %}{{car.Rent_Price}}/per Day{% endif %}</h3>
                 </div>
 
                 <div class="product-image">
                     {% if car.image_url %}
-                        <img src="{{ car.image_url }}" alt="{{ car.Make }} {{ car.Model }}" onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                        <img src="{{ car.image_url }}"
+                             alt="{{ car.Make }} {{ car.Model }}"
+                             onerror="this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70'">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car">
                     {% endif %}
                 </div>
 
@@ -48,41 +57,75 @@ Order Detail
                 <div class="timeline-item active">
                     <span></span>
                     <div>
-                        <h4>Order Confirmed</h4>
-                        <p>{{ order.Order_Date }}</p>
+                        <h4>Request Created</h4>
+                        <p>
+                            {% if order.Date %}
+                                {{ order.Date }}
+                            {% else %}
+                                Date not available
+                            {% endif %}
+                        </p>
                     </div>
                 </div>
 
+                {% if status == 'Pending' %}
                 <div class="timeline-item active">
                     <span></span>
                     <div>
-                        <h4>{{ order.Status }}</h4>
-                        <p>{{ order.Delivery_Date }}</p>
+                        <h4>Pending</h4>
+                        <p>Your request is waiting for approval.</p>
                     </div>
                 </div>
 
+                {% elif status == 'Approved' %}
+                <div class="timeline-item active">
+                    <span></span>
+                    <div>
+                        <h4>Approved</h4>
+                        <p>Your request has been approved.</p>
+                    </div>
+                </div>
+
+                {% elif status == 'Rejected' %}
+                <div class="timeline-item rejected">
+                    <span></span>
+                    <div>
+                        <h4>Rejected</h4>
+                        <p>Your request has been rejected.</p>
+                    </div>
+                </div>
+
+                {% elif status == 'Delivered' %}
+                <div class="timeline-item active">
+                    <span></span>
+                    <div>
+                        <h4>Delivered</h4>
+                        <p>This request has been completed.</p>
+                    </div>
+                </div>
+                {% endif %}
+
             </div>
+
             <div class="order-id-box">
-                Order #{{ order.Order_ID }}
+                {% if type == 'Order' %}
+                    Order #{{ order.Order_ID }}
+                {% elif type == 'Sold' %}
+                    Selling Request #{{ order.Sell_ID }}
+                {% elif type == 'Rent' %}
+                    Rent Request #{{ order.Rent_ID }}
+                {% endif %}
             </div>
 
         </div>
 
-        <!-- RIGHT SIDE -->
         <div class="order-detail-right">
 
             <div class="side-card">
 
-                <h3>Delivery details</h3>
+                <h3>Customer Details</h3>
 
                 <div class="delivery-box">
-                    <div class="detail-line">
-                        <i class="fa-solid fa-house"></i>
-                        <p>
-                            <strong>Home</strong>
-                            {{ order.Address }}
-                        </p>
-                    </div>
 
                     <div class="detail-line">
                         <i class="fa-regular fa-user"></i>
@@ -91,36 +134,106 @@ Order Detail
                             {{ order.Phone_No }}
                         </p>
                     </div>
+
+                    <div class="detail-line">
+                        <i class="fa-regular fa-envelope"></i>
+                        <p>
+                            <strong>Email</strong>
+                            {{ order.Email }}
+                        </p>
+                    </div>
+
+                    {% if order.Address %}
+                    <div class="detail-line">
+                        <i class="fa-solid fa-house"></i>
+                        <p>
+                            <strong>Address</strong>
+                            {{ order.Address }}
+                        </p>
+                    </div>
+                    {% endif %}
+
                 </div>
 
             </div>
 
             <div class="side-card">
 
-                <h3>Price details</h3>
+                <h3>Vehicle Details</h3>
 
                 <div class="price-box">
 
                     <div class="price-row">
-                        <span>Listing price</span>
-                        <p>${{ car.MSRP }}</p>
+                        <span>Make</span>
+                        <p>{{ car.Make }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Model</span>
+                        <p>{{ car.Model }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Year</span>
+                        <p>{{ car.Year }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Engine</span>
+                        <p>{{ car.Engine_HP }} HP</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Cylinders</span>
+                        <p>{{ car.Engine_Cylinders }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Driven Wheels</span>
+                        <p>{{ car.Driven_Wheels }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Highway MPG</span>
+                        <p>{{ car.highway_MPG }}</p>
+                    </div>
+
+                    <div class="price-row">
+                        <span>City MPG</span>
+                        <p>{{ car.city_mpg }}</p>
                     </div>
 
                     <hr>
 
                     <div class="price-row total">
-                        <span>Total amount</span>
-                        <p>${{ car.MSRP }}</p>
+                        <span>Total Amount</span>
+                        
+                        <p>${% if car.MSRP %}{{ car.MSRP }}{% else %}{{car.Rent_Price}}/per Day{% endif %}</p>
                     </div>
 
+                    {% if order.Payment_Mode %}
                     <div class="paid-box">
                         <span>Paid By</span>
                         <p>{{ order.Payment_Mode }}</p>
                     </div>
+                    {% endif %}
+
                 </div>
+
             </div>
 
         </div>
+
+        {% endwith %}
+
+        {% empty %}
+
+        <div class="no-orders">
+            <h2>No Order Detail Found</h2>
+            <p>This history record does not contain valid order data.</p>
+        </div>
+
+        {% endfor %}
 
     </div>
 

@@ -19,6 +19,12 @@ def load_data(filename):
     except Exception as e:
         print(f'Data Load Error: {e}')
         return None
+def save_data(data, filename):
+    try:
+        PATH = os.path.join(Data_Path, filename)
+        data.to_csv(PATH, index=False)
+    except Exception as e:
+        print(f'Data Load Error: {e}')
 
 def load_recommandation():
     try:

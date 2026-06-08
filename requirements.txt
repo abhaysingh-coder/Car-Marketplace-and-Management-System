@@ -1,0 +1,10 @@
+Django==6.0.4
+pandas
+numpy
+scikit-learn
+joblib
+scipy
+gunicorn
+whitenoise
+dj-database-url
+psycopg2-binary

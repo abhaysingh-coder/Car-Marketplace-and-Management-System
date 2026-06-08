@@ -6645,3 +6645,38 @@ textarea {
         font-size: 24px;
     }
 }
+
+.mobile-only {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+    }
+
+    .mobile-login-btn {
+        display: block;
+        background: #2563eb;
+        color: #ffffff !important;
+        padding: 12px 20px;
+        border-radius: 30px;
+        text-align: center;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+}

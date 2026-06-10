@@ -34,7 +34,7 @@ def load_recommandation():
             os.makedirs(os.path.dirname(RECOMMANDATION_PATH),exist_ok=True)
             url = "https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/car_embeddings.pkl"
             urllib.request.urlretrieve(url, RECOMMANDATION_PATH)
-        car_embeddings = joblib.dump(RECOMMANDATION_PATH)
+        car_embeddings = joblib.load(RECOMMANDATION_PATH)
         similarity_matrix = cosine_similarity(car_embeddings)
         return similarity_matrix
     except Exception as e:

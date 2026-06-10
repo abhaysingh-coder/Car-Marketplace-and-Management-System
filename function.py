@@ -4,9 +4,10 @@ import pandas as pd
 import urllib.request
 import joblib
 from django.conf import settings
+from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_DIR = settings.BASE_DIR
-RECOMMANDATION_PATH = os.path.join(BASE_DIR, 'Data Science', 'Models', 'Recommandation_similarity_matrix.npz')
+RECOMMANDATION_PATH = os.path.join(BASE_DIR, 'Data Science', 'Models', 'car_embeddings.pkl')
 PREDICTION_PATH = os.path.join(BASE_DIR, 'Data Science', 'Models', 'Prediction.pkl')
 ENCODER_PATH = os.path.join(BASE_DIR, 'Data Science', 'Encoder', 'Prediction')
 SCALER_PATH =  os.path.join(BASE_DIR, 'Data Science', 'Scaler', 'Prediction')
@@ -31,9 +32,10 @@ def load_recommandation():
     try:
         if not os.path.exists(RECOMMANDATION_PATH):
             os.makedirs(os.path.dirname(RECOMMANDATION_PATH),exist_ok=True)
-            url = "https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/Recommandation_similarity_matrix.npz"
+            url = "https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/car_embeddings.pkl"
             urllib.request.urlretrieve(url, RECOMMANDATION_PATH)
-        similarity_matrix = np.load(RECOMMANDATION_PATH)['arr_0']
+        car_embeddings = np.load(RECOMMANDATION_PATH)
+        similarity_matrix = cosine_similarity(car_embeddings)
         return similarity_matrix
     except Exception as e:
         print(f"Recommendation Model Load Error: {e}")

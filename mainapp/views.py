@@ -235,20 +235,16 @@ def recommandation(request):
         if request.method == 'POST':
             car_name = request.POST.get('car_name')
             car_model = request.POST.get('car_model')
-
             selected_car = car_name + ' ' + car_model
-
             matches = data[
                 data["Make"].str.lower().str.contains(car_name.lower(), na=False) &
                 data["Model"].str.lower().str.contains(car_model.lower(), na=False)
             ]
-
             if matches.empty:
                 message = "Car not found in dataset."
             else:
                 recommended = recommend(matches)
                 cars = recommended.to_dict('records')
-
             if user:
                 RecommandationHistory.objects.create(
                     Role=user['Role'],
@@ -257,15 +253,12 @@ def recommandation(request):
                     Model=car_model,
                     Data=cars
                 )
-
         context = {
             'cars': cars,
             'message': message,
             'selected_car': selected_car
         }
-
         return render(request, 'recommandation.html', context)
-
     except Exception as e:
         return render(request, 'error.html', {'error': e})
 

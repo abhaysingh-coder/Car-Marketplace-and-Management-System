@@ -33,7 +33,7 @@ def load_recommandation():
             os.makedirs(os.path.dirname(RECOMMANDATION_PATH),exist_ok=True)
             url = "https://huggingface.co/abhaysinghsrinet/Car-Recommandation-Similarity-Matrix/resolve/main/Recommandation_similarity_matrix.pkl"
             urllib.request.urlretrieve(url, RECOMMANDATION_PATH)
-        similarity_matrix = joblib.load(RECOMMANDATION_PATH)['arr_0']
+        similarity_matrix = joblib.load(RECOMMANDATION_PATH)
         return similarity_matrix
     except Exception as e:
         print(f"Recommendation Model Load Error: {e}")

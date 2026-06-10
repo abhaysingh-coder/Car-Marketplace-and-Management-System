@@ -28,10 +28,13 @@ col, row = data.shape
 
 
 def recommend(matches):
+    # car_index = matches.index[0]
+    # similarity_scores = list(enumerate(similarity_matrix[car_index]))
+    # similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
+    # car_indices = [i[0] for i in similarity_scores[1:9]]
+
     car_index = matches.index[0]
-    similarity_scores = list(enumerate(similarity_matrix[car_index]))
-    similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
-    car_indices = [i[0] for i in similarity_scores[1:9]]
+    car_indices = similarity_matrix[car_index][:8]
 
     available_columns = [
         col for col in [
